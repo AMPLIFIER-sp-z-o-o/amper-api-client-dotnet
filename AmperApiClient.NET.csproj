@@ -5,6 +5,7 @@
     <PackageId>AmperApiClient.NET</PackageId>
     <Authors>Amplifier</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Package for communicating with Amplifier API</Description>
   </PropertyGroup>
 
   <ItemGroup>
