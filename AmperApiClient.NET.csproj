@@ -6,6 +6,10 @@
     <Authors>Amplifier</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Package for communicating with Amplifier API</Description>
+    <Version>1.0.1</Version>
+    <Copyright>Copyright 2021 Amplifier</Copyright>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageTags>Amplifier</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
