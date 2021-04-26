@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Amplifier</RootNamespace>
+    <Company>AMPLIFIER sp. z o.o.</Company>
+    <Authors>Tomasz Dziemidowicz</Authors>
+    <Product>AMPER</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+</Project>

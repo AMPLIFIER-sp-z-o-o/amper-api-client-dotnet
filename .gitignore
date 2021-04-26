@@ -48,3 +48,7 @@ Thumbs.db
 *.mov
 *.wmv
 
+amper-api-library/obj/
+amper-api-library/bin/
+amper-api-client/obj/
+.vs/
