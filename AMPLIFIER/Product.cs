@@ -18,6 +18,23 @@ namespace Amplifier
         public string price_level_external_id { get; set; }
         public string external_id { get; set; }
         public decimal price { get; set; }
+        public decimal discount { get; set; }
+        public string start_date { get; set; }
+        public string end_date { get; set; }
+        public int order { get; set; }
+    }
+
+    public class CategoryDiscount
+    {
+        public string category_external_id { get; set; }
+        public string price_level_external_id { get; set; }
+        public string external_id { get; set; }
+        public decimal discount { get; set; }
+        public int order { get; set; }
+        public string start_date { get; set; }
+        public string end_date { get; set; }
+
+
     }
 
     public class PriceLevel
@@ -103,4 +120,17 @@ namespace Amplifier
         public bool unit_roundup { get; set; }
         public decimal default_price { get; set; }
     }
+
+
+    public class RelatedProducts
+    {
+        public string external_id { get; set; }
+        public List<RelatedProduct> related_products { get; set; }
+    }
+
+    public class RelatedProduct
+    {
+        public string external_id { get; set; }
+    }
+
 }
