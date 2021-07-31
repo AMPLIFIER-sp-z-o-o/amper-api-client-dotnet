@@ -31,17 +31,17 @@ You can add this package to your project by using:
 ```cs
 using Amplifier;
 ```
-* Create ```AmplifierJWTAuth``` object with your *username* and *password*
+* Create ```AmplifierJWTAuth``` object with your *username* and *password* and *url* (url of your endpoint)
 
 ```cs
-AmplifierJWTAuth amplifierJWTAuth = new AmplifierJWTAuth(USERNAME, PASSWORD);
+AmplifierJWTAuth amplifierJWTAuth = new AmplifierJWTAuth(USERNAME, PASSWORD, URL);
 ```
 * use it's ```getToken()``` method to authenticate and get your JWT Token
     
 ```cs
 b2BWSConfig.JWTToken = await amplifierJWTAuth.getToken();
 ```
-* add B2B WS URL 
+* add AMPER WS URL 
 
 ```cs
 b2BWSConfig.b2BWSUrl = "https://example-amper-b2b-ws.com"
