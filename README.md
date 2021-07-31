@@ -31,10 +31,10 @@ You can add this package to your project by using:
 ```cs
 using Amplifier;
 ```
-* Create ```AmplifierJWTAuth``` object with your *scope*, *client_secret*, *username* and *password*
+* Create ```AmplifierJWTAuth``` object with your *username* and *password*
 
 ```cs
-AmplifierJWTAuth amplifierJWTAuth = new AmplifierJWTAuth(SCOPE, CLIENT_SECRET, USERNAME, PASSWORD);
+AmplifierJWTAuth amplifierJWTAuth = new AmplifierJWTAuth(USERNAME, PASSWORD);
 ```
 * use it's ```getToken()``` method to authenticate and get your JWT Token
     

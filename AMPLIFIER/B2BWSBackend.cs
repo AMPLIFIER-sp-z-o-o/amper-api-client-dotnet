@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Text;
-using Amplifier.Utils;
 using Newtonsoft.Json;
 
 namespace Amplifier
@@ -19,7 +18,7 @@ namespace Amplifier
             AttachAuthorizationHeader();
         }
 
-        private void AttachAuthorizationHeader()
+        private async void AttachAuthorizationHeader()
         {
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + b2BWSConfig.JWTToken);
@@ -27,6 +26,7 @@ namespace Amplifier
 
         public async System.Threading.Tasks.Task SendProductsAsync(List<Product> products)
         {
+
             var t = await client.PostAsync(b2BWSConfig.B2BWSUrl + "products-import", new StringContent(JsonConvert.SerializeObject(products), Encoding.UTF8, "application/json"));
         }
 
