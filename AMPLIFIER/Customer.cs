@@ -7,6 +7,13 @@ namespace Amplifier
         public string name { get; set; }
         public string short_name { get; set; }
         public string external_id { get; set; }
+        public string city { get; set; }
+        public string postal_code { get; set; }
+        public string street { get; set; }
+        public string email { get; set; }
+        public string phone { get; set; }
+        public string voivodeship { get; set; }
+        public string tax_id { get; set; }
         public List<Customer> customers { get; set; }
     }
     public class Customer
@@ -53,6 +60,30 @@ namespace Amplifier
         public string phone { get; set; }
         public string voivodeship { get; set; }
         public string external_id { get; set; }
+        public string customer_external_id { get; set; }
+    }
+
+    public class CustomerCategory
+    {
+        public string external_id { get; set; }
+        public string parent_external_id { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
+        public string seo_tags { get; set; }
+        public int order { get; set; }
+    }
+
+    public class CustomerCategoryRelation
+    {
+        public string external_id { get; set; }
+        public string category_external_id { get; set; }
+        public string customer_external_id { get; set; }
+    }
+
+    public class CustomerSalesRepresentative
+    {
+        public string external_id { get; set; }
+        public string customer_category_external_id { get; set; }
         public string customer_external_id { get; set; }
     }
 

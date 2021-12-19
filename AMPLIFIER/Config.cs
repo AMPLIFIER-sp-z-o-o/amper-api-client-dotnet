@@ -1,4 +1,4 @@
-public class B2BWSConfig
+public class WSConfig
 {
     public string B2BWSUrl { get; set; }
     public string ERPConnectionString { get; set; }

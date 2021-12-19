@@ -1,8 +1,5 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using Newtonsoft.Json.Linq;
 
 namespace Amplifier
@@ -35,7 +32,7 @@ namespace Amplifier
             var response = await client.PostAsync(uri, content);
             var responseContent = await response.Content.ReadAsStringAsync();
             JObject jwtObj = JObject.Parse(responseContent);
-            return (string)jwtObj["access_token"];
+            return (string)jwtObj["access_token"]; ;
         }
     }
 }

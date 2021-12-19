@@ -40,7 +40,7 @@ namespace Amplifier.Utils
         }
     }
 
-    public class B2BUtilities
+    public class WSUtilities
     {
         public static IEnumerable<List<T>> SplitList<T>(List<T> objectsList, int nSize = 1000)
         {
@@ -72,11 +72,7 @@ namespace Amplifier.Utils
                     return match.Groups[1].Value + domainName;
                 }
             }
-            catch (RegexMatchTimeoutException e)
-            {
-                return false;
-            }
-            catch (ArgumentException e)
+            catch 
             {
                 return false;
             }

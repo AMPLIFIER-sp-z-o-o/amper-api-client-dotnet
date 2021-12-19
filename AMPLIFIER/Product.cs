@@ -119,6 +119,12 @@ namespace Amplifier
         public decimal cumulative_unit_ratio_splitter { get; set; }
         public bool unit_roundup { get; set; }
         public decimal default_price { get; set; }
+        public bool is_b2b_product { get; set; }
+        public bool is_b2c_product { get; set; }
+        public bool is_msf_product { get; set; }
+        public bool is_b2m_product { get; set; }
+        public bool is_msk_product { get; set; }
+
     }
 
 

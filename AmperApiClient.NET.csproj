@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <PackageId>AmperApiClient.NET</PackageId>
     <Authors>Amplifier</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Package for communicating with Amplifier API</Description>
-    <Version>1.0.2</Version>
+    <Version>1.1.0</Version>
     <Copyright>Copyright 2021 Amplifier</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageTags>Amplifier</PackageTags>

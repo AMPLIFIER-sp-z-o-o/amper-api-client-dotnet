@@ -1,53 +1,59 @@
-# [AmperApiClient.NET](https://www.nuget.org/packages/AmperApiClient.NET/) #
+# [AmperApiClient.NET](https://www.nuget.org/packages/AmperApiClient.NET/)
 
+Nuget Package for communicating with Amplifier API.
 
-Nuget Package for communicating with Amplifier API. 
+## Requirements
 
-## Install ##
+.net core version 5
+
+## Install
 
 You can add this package to your project by using:
 
-* Package Manager Console in Visual Studio
+- Package Manager Console in Visual Studio
 
-    ```Install-Package AmperApiClient.NET```
+  `Install-Package AmperApiClient.NET`
 
-* .NET CLI
+- .NET CLI
 
-    ```dotnet add package AmperApiClient.NET```
+  `dotnet add package AmperApiClient.NET`
 
-* add it directly to your .csproj file
+- add it directly to your .csproj file
 
-    ```xml
-    <ItemGroup>
-        <PackageReference Include="AmperApiClient.NET" Version="1.0.2" />
-    </ItemGroup>
-    ```
+  ```xml
+  <ItemGroup>
+      <PackageReference Include="AmperApiClient.NET" Version="1.1.0" />
+  </ItemGroup>
+  ```
 
-## Getting Started ##
+## Getting Started
 
-### [Example Project](https://bitbucket.org/amplifierspzoo/amper-translator-example) ###
-
+### [Example Project](https://bitbucket.org/amplifierspzoo/amper-translator-example)
 
 ```cs
 using Amplifier;
 ```
-* Create ```AmplifierJWTAuth``` object with your *username* and *password* and *url* (url of your endpoint)
+
+- Create `AmplifierJWTAuth` object with your _username_ and _password_ and _url_ (url of your endpoint)
 
 ```cs
 AmplifierJWTAuth amplifierJWTAuth = new AmplifierJWTAuth(USERNAME, PASSWORD, URL);
 ```
-* use it's ```getToken()``` method to authenticate and get your JWT Token
-    
+
+- use it's `getToken()` method to authenticate and get your JWT Token
+
 ```cs
 b2BWSConfig.JWTToken = await amplifierJWTAuth.getToken();
 ```
-* add AMPER WS URL 
+
+- add AMPER WS URL
 
 ```cs
 b2BWSConfig.b2BWSUrl = "https://example-amper-b2b-ws.com"
 ```
-* create an import class where you can:
-    * fetch data you want to send
-    * map it to Amplifier classes (```Product```, ```Settlement```...)
-    * use ```B2BWSBackend``` methods to send it
-* when creating ```B2BWSBackend``` pass ```B2BWSConfig``` with your *JWTToken* and *B2BWSUrl* you wish to communicate with
+
+- create an import class where you can:
+  - fetch data you want to send
+  - map it to Amplifier classes (`Product`, `Settlement`...)
+  - use `B2BWSBackend` methods to send it
+- when creating `B2BWSBackend` pass `B2BWSConfig` with your _JWTToken_ and _B2BWSUrl_ you wish to communicate with
