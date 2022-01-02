@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
+using Sentry;
 
 namespace Amplifier
 {
@@ -8,7 +10,6 @@ namespace Amplifier
     {
         private string username = null;
         private string password = null;
-
         private string authUrl = "";
 
         public AmplifierJWTAuth(string username, string password, string authUrl)
@@ -16,10 +17,12 @@ namespace Amplifier
             this.username = username;
             this.password = password;
             this.authUrl = authUrl;
+            Sentry.Instance.ConfigureScope(authUrl, username);
         }
 
         public async System.Threading.Tasks.Task<string> GetToken()
         {
+            var transaction = SentrySdk.StartTransaction("AmplifierJWTAuth", "GetToken");
             HttpClient client = new HttpClient();
             string uri = authUrl;
 
@@ -32,7 +35,8 @@ namespace Amplifier
             var response = await client.PostAsync(uri, content);
             var responseContent = await response.Content.ReadAsStringAsync();
             JObject jwtObj = JObject.Parse(responseContent);
-            return (string)jwtObj["access_token"]; ;
+            transaction.Finish();
+            return (string)jwtObj["access_token"]; 
         }
     }
 }
