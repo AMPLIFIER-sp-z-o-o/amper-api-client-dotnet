@@ -39,6 +39,7 @@ namespace Amplifier
         public decimal trade_credit_limit { get; set; }
         public decimal overdue_limit { get; set; }
         public decimal discount { get; set; }
+        public string currency_code { get; set; }
     }
 
     public class CustomerProductLogisticMinimum

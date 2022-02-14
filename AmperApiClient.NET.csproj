@@ -3,13 +3,17 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <PackageId>AmperApiClient.NET</PackageId>
-    <Authors>Amplifier</Authors>
+    <Authors>AMPLIFIER</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Description>Package for communicating with Amplifier API</Description>
+    <Description>Package for communicating with AMPER API</Description>
     <Version>1.1.0</Version>
-    <Copyright>Copyright 2021 Amplifier</Copyright>
+    <Copyright>Copyright 2021 AMPLIFIER sp. z o.o.</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageTags>Amplifier</PackageTags>
+    <PackageVersion>1.1.5</PackageVersion>
+    <AssemblyVersion>1.1.5</AssemblyVersion>
+    <FileVersion>1.1.5</FileVersion>
+    <PackageProjectUrl>https://ampliapps.com</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

@@ -437,6 +437,31 @@ namespace Amplifier
                 return string.Empty;
             }
         }
+        
+        public async System.Threading.Tasks.Task<string> ChangeComplaintStatus(string status, string token)
+        {
+            var span = Sentry.Instance.GetTransaction("Backend").StartChild("complaint-change-status");
+            try
+            {
+                var content = JsonConvert.SerializeObject(new { status = status });
+                string uri = String.Format(_wsConfig.B2BWSUrl.Replace("api/", "") + "complaints-translator/{0}/", token);
+                var response = await _client.SendAsync(new HttpRequestMessage(new HttpMethod("PATCH"), uri)
+                {
+                    Content = new StringContent(content, Encoding.UTF8, "application/json")
+                });
+                response.EnsureSuccessStatusCode();
+                if (response.StatusCode != HttpStatusCode.Created)
+                    SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
+                span.Finish();
+                return await response.Content.ReadAsStringAsync();
+            }
+            catch (Exception e)
+            {
+                SentrySdk.CaptureException(e);
+                return string.Empty;
+            }
+
+        }
 
         public async System.Threading.Tasks.Task SendCustomerCategoriesAsync(List<CustomerCategory> categories)
         {

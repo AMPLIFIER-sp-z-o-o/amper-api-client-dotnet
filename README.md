@@ -34,6 +34,18 @@ You can add this package to your project by using:
 using Amplifier;
 ```
 
+You need to configure Sentry before any usage. First add package
+
+```shell
+dotnet add package Sentry
+```
+init Sentry connection before any other Amplifier object initiation
+
+```c#
+Amplifier.Sentry.SentryDsn = "https://xxxxxxxxxxxxxxxxxxx@xxxxxxx.ingest.sentry.io/xxxxxxxx";
+```
+
+
 - Create `AmplifierJWTAuth` object with your _username_ and _password_ and _url_ (url of your endpoint)
 
 ```cs
@@ -55,5 +67,5 @@ b2BWSConfig.b2BWSUrl = "https://example-amper-b2b-ws.com"
 - create an import class where you can:
   - fetch data you want to send
   - map it to Amplifier classes (`Product`, `Settlement`...)
-  - use `B2BWSBackend` methods to send it
-- when creating `B2BWSBackend` pass `B2BWSConfig` with your _JWTToken_ and _B2BWSUrl_ you wish to communicate with
+  - use `Backend` methods to send it
+- when creating `Backend` pass `WSConfig` with your _JWTToken_ and _B2BWSUrl_ you wish to communicate with
