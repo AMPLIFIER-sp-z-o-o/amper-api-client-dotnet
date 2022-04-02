@@ -13,6 +13,8 @@ namespace Amplifier
         public decimal value_net { get; set; }
         public decimal value_gross { get; set; }
         public string external_id { get; set; }
+        public string document_provider_short_name { get; set; }
+        public string document_type_name { get; set; }        
         public List<DocumentLine> document_lines { get; set; }
     }
 }

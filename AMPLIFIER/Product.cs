@@ -33,8 +33,6 @@ namespace Amplifier
         public int order { get; set; }
         public string start_date { get; set; }
         public string end_date { get; set; }
-
-
     }
 
     public class PriceLevel
@@ -42,6 +40,17 @@ namespace Amplifier
         public string name { get; set; }
         public string external_id { get; set; }
         public int order { get; set; }
+        public bool is_global { get; set; }
+        public bool is_enabled { get; set; }
+    }
+
+    public class PriceLevelAssigment
+    {
+        public string external_id { get; set; }
+        public string price_level { get; set; }
+        public string customer_category { get; set; }
+        public string customer { get; set; }
+
     }
 
     public class Stock
@@ -124,6 +133,10 @@ namespace Amplifier
         public bool is_msf_product { get; set; }
         public bool is_b2m_product { get; set; }
         public bool is_msk_product { get; set; }
+        public string dimension_unit_of_measure { get; set; }
+        public decimal dimension_width { get; set; }
+        public decimal dimension_height { get; set; }
+        public decimal dimension_depth { get; set; }        
 
     }
 
