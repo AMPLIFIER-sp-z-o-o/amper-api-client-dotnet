@@ -518,6 +518,60 @@ namespace Amplifier
             span.Finish();
         }
 
+        public async System.Threading.Tasks.Task SendPromotionsAsync(List<Promotion> promotions)
+        {
+            var span = Sentry.Instance.GetTransaction("Backend").StartChild("promotions-import");
+            try
+            {
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "promotions-import",
+                    new StringContent(JsonConvert.SerializeObject(promotions), Encoding.UTF8, "application/json"));
+                if (response.StatusCode != HttpStatusCode.Created)
+                    SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
+            }
+            catch (Exception e)
+            {
+                SentrySdk.CaptureException(e);
+            }
+
+            span.Finish();            
+        }
+
+        public async System.Threading.Tasks.Task SendPromotinCustomersAsync(List<PromotionCustomer> promotions)
+        {
+            var span = Sentry.Instance.GetTransaction("Backend").StartChild("promotions-customers-import");
+            try
+            {
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "promotions-customers-import",
+                    new StringContent(JsonConvert.SerializeObject(promotions), Encoding.UTF8, "application/json"));
+                if (response.StatusCode != HttpStatusCode.Created)
+                    SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
+            }
+            catch (Exception e)
+            {
+                SentrySdk.CaptureException(e);
+            }
+
+            span.Finish();
+        }
+
+        public async System.Threading.Tasks.Task SendPromotionCustomerCategoriesAsync(List<PromotionCustomerCategory> promotions)
+        {
+            var span = Sentry.Instance.GetTransaction("Backend").StartChild("promotions-customer-categories-import");
+            try
+            {
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "promotions-customer-categories-import",
+                    new StringContent(JsonConvert.SerializeObject(promotions), Encoding.UTF8, "application/json"));
+                if (response.StatusCode != HttpStatusCode.Created)
+                    SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
+            }
+            catch (Exception e)
+            {
+                SentrySdk.CaptureException(e);
+            }
+
+            span.Finish();
+        }        
+        
         public void Dispose()
         {
             Sentry.Instance.GetTransaction("Backend").Finish();
