@@ -36,7 +36,7 @@ namespace Amplifier
             {
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "products-import",
                     new StringContent(JsonConvert.SerializeObject(products), Encoding.UTF8, "application/json"));
-                if (response.StatusCode != HttpStatusCode.Created)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
             }
             catch (Exception e)
@@ -55,7 +55,7 @@ namespace Amplifier
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "price-levels-import",
                     new StringContent(JsonConvert.SerializeObject(priceLevels), Encoding.UTF8, "application/json"));
 
-                if (response.StatusCode != HttpStatusCode.Created)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
             }
             catch (Exception e)
@@ -73,7 +73,7 @@ namespace Amplifier
             {
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "prices-import",
                     new StringContent(JsonConvert.SerializeObject(priceLevels), Encoding.UTF8, "application/json"));
-                if (response.StatusCode != HttpStatusCode.Created)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
             }
             catch (Exception e)
@@ -92,7 +92,7 @@ namespace Amplifier
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "stock-locations-import",
                     new StringContent(JsonConvert.SerializeObject(stockLocations), Encoding.UTF8, "application/json"));
 
-                if (response.StatusCode != HttpStatusCode.Created)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
             }
             catch (Exception e)
@@ -110,7 +110,7 @@ namespace Amplifier
             {
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "stocks-import",
                     new StringContent(JsonConvert.SerializeObject(stocks), Encoding.UTF8, "application/json"));
-                if (response.StatusCode != HttpStatusCode.Created)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
             }
             catch (Exception e)
@@ -128,7 +128,7 @@ namespace Amplifier
             {
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "product-categories-import",
                     new StringContent(JsonConvert.SerializeObject(categories), Encoding.UTF8, "application/json"));
-                if (response.StatusCode != HttpStatusCode.Created)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
             }
             catch (Exception e)
@@ -147,7 +147,7 @@ namespace Amplifier
             {
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "product-categories-relation-import",
                     new StringContent(JsonConvert.SerializeObject(relations), Encoding.UTF8, "application/json"));
-                if (response.StatusCode != HttpStatusCode.Created)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
             }
             catch (Exception e)
@@ -166,7 +166,7 @@ namespace Amplifier
             {
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "customer-products-import",
                     new StringContent(JsonConvert.SerializeObject(relations), Encoding.UTF8, "application/json"));
-                if (response.StatusCode != HttpStatusCode.Created)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
             }
             catch (Exception e)
@@ -185,7 +185,7 @@ namespace Amplifier
             {
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "customer-logistic-minimum-import",
                     new StringContent(JsonConvert.SerializeObject(relations), Encoding.UTF8, "application/json"));
-                if (response.StatusCode != HttpStatusCode.Created)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
             }
             catch (Exception e)
@@ -204,7 +204,7 @@ namespace Amplifier
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "product-related-products-import",
                     new StringContent(JsonConvert.SerializeObject(related_products), Encoding.UTF8,
                         "application/json"));
-                if (response.StatusCode != HttpStatusCode.Created)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
             }
             catch (Exception e)
@@ -222,7 +222,7 @@ namespace Amplifier
             {
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "accounts-import",
                     new StringContent(JsonConvert.SerializeObject(accounts), Encoding.UTF8, "application/json"));
-                if (response.StatusCode != HttpStatusCode.Created)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
             }
             catch (Exception e)
@@ -243,7 +243,7 @@ namespace Amplifier
                 {
                     var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "document-import",
                         new StringContent(JsonConvert.SerializeObject(p), Encoding.UTF8, "application/json"));
-                    if (response.StatusCode != HttpStatusCode.Created)
+                    if (!response.IsSuccessStatusCode)
                         SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
                 }
             }
@@ -262,7 +262,7 @@ namespace Amplifier
             {
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "settlement-import",
                     new StringContent(JsonConvert.SerializeObject(settlements), Encoding.UTF8, "application/json"));
-                if (response.StatusCode != HttpStatusCode.Created)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
             }
             catch (Exception e)
@@ -295,7 +295,7 @@ namespace Amplifier
                         "&last_package=" + last_package + "&single_thread=" + single_thread,
                         new StringContent(JsonConvert.SerializeObject(p), Encoding.UTF8, "application/json"));
                     first_package = "0";
-                    if (response.StatusCode != HttpStatusCode.Created)
+                    if (!response.IsSuccessStatusCode)
                         SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
                 }
             }
@@ -324,7 +324,7 @@ namespace Amplifier
 
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "product-images/",
                     multipartContent);
-                if (response.StatusCode != HttpStatusCode.Created)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
             }
             catch (Exception e)
@@ -344,7 +344,7 @@ namespace Amplifier
                     await _client.GetAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "orders-translator/?status=" +
                                            status);
                 response.EnsureSuccessStatusCode();
-                if (response.StatusCode != HttpStatusCode.OK)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
                 span.Finish();
                 return await response.Content.ReadAsStringAsync();
@@ -365,7 +365,7 @@ namespace Amplifier
                 HttpResponseMessage response = await _client.GetAsync(uri);
                 response.EnsureSuccessStatusCode();
                 span.Finish();
-                if (response.StatusCode != HttpStatusCode.OK)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
                 return await response.Content.ReadAsStringAsync();
             }
@@ -388,7 +388,7 @@ namespace Amplifier
                     Content = new StringContent(content, Encoding.UTF8, "application/json")
                 });
                 response.EnsureSuccessStatusCode();
-                if (response.StatusCode != HttpStatusCode.Created)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
                 span.Finish();
                 return await response.Content.ReadAsStringAsync();
@@ -407,7 +407,7 @@ namespace Amplifier
             {
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "addresses-import",
                     new StringContent(JsonConvert.SerializeObject(addresses), Encoding.UTF8, "application/json"));
-                if (response.StatusCode != HttpStatusCode.Created)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
             }
             catch (Exception e)
@@ -426,7 +426,7 @@ namespace Amplifier
                 HttpResponseMessage response =
                     await _client.GetAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "complaints-translator/");
                 response.EnsureSuccessStatusCode();
-                if (response.StatusCode != HttpStatusCode.OK)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
                 span.Finish();
                 return await response.Content.ReadAsStringAsync();
@@ -450,7 +450,7 @@ namespace Amplifier
                     Content = new StringContent(content, Encoding.UTF8, "application/json")
                 });
                 response.EnsureSuccessStatusCode();
-                if (response.StatusCode != HttpStatusCode.Created)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
                 span.Finish();
                 return await response.Content.ReadAsStringAsync();
@@ -470,7 +470,7 @@ namespace Amplifier
             {
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "customer-categories-import",
                     new StringContent(JsonConvert.SerializeObject(categories), Encoding.UTF8, "application/json"));
-                if (response.StatusCode != HttpStatusCode.Created)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
             }
             catch (Exception e)
@@ -489,7 +489,7 @@ namespace Amplifier
             {
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "customer-categories-relation-import",
                     new StringContent(JsonConvert.SerializeObject(relations), Encoding.UTF8, "application/json"));
-                if (response.StatusCode != HttpStatusCode.Created)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
             }
             catch (Exception e)
@@ -507,7 +507,7 @@ namespace Amplifier
             {
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "price-level-assigment-import",
                     new StringContent(JsonConvert.SerializeObject(assigments), Encoding.UTF8, "application/json"));
-                if (response.StatusCode != HttpStatusCode.Created)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
             }
             catch (Exception e)
@@ -525,7 +525,7 @@ namespace Amplifier
             {
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "promotions-import",
                     new StringContent(JsonConvert.SerializeObject(promotions), Encoding.UTF8, "application/json"));
-                if (response.StatusCode != HttpStatusCode.Created)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
             }
             catch (Exception e)
@@ -543,7 +543,7 @@ namespace Amplifier
             {
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "promotions-customers-import",
                     new StringContent(JsonConvert.SerializeObject(promotions), Encoding.UTF8, "application/json"));
-                if (response.StatusCode != HttpStatusCode.Created)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
             }
             catch (Exception e)
@@ -561,7 +561,7 @@ namespace Amplifier
             {
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "promotions-customer-categories-import",
                     new StringContent(JsonConvert.SerializeObject(promotions), Encoding.UTF8, "application/json"));
-                if (response.StatusCode != HttpStatusCode.Created)
+                if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
             }
             catch (Exception e)
