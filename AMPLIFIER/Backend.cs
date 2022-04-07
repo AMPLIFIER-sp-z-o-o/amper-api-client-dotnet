@@ -424,7 +424,7 @@ namespace Amplifier
             try
             {
                 HttpResponseMessage response =
-                    await _client.GetAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "complaints-translator/");
+                    await _client.GetAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "complaints-translator/?status=APPROVED");
                 response.EnsureSuccessStatusCode();
                 if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
