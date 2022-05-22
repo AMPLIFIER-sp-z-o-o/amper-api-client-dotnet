@@ -335,7 +335,7 @@ namespace Amplifier
             span.Finish();
         }
 
-        public async System.Threading.Tasks.Task<string> GetListOfOrders(string status)
+        public async System.Threading.Tasks.Task<List<Order>> GetListOfOrders(string status)
         {
             var span = Sentry.Instance.GetTransaction("Backend").StartChild("order-get-list");
             try
@@ -346,17 +346,18 @@ namespace Amplifier
                 response.EnsureSuccessStatusCode();
                 if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
+                List<Order> orders = JsonConvert.DeserializeObject<List<Order>>(await response.Content.ReadAsStringAsync());
                 span.Finish();
-                return await response.Content.ReadAsStringAsync();
+                return orders;
             }
             catch (Exception e)
             {
                 SentrySdk.CaptureException(e);
-                return string.Empty;
+                return new List<Order>();
             }
         }
 
-        public async System.Threading.Tasks.Task<string> GetOrder(string token)
+        public async System.Threading.Tasks.Task<Order> GetOrder(string token)
         {
             var span = Sentry.Instance.GetTransaction("Backend").StartChild("order-get");
             try
@@ -364,15 +365,16 @@ namespace Amplifier
                 string uri = String.Format(_wsConfig.B2BWSUrl.Replace("api/", "") + "orders-translator/{0}/", token);
                 HttpResponseMessage response = await _client.GetAsync(uri);
                 response.EnsureSuccessStatusCode();
-                span.Finish();
                 if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
-                return await response.Content.ReadAsStringAsync();
+                Order order = JsonConvert.DeserializeObject<Order>(await response.Content.ReadAsStringAsync());
+                span.Finish();
+                return order;
             }
             catch (Exception e)
             {
                 SentrySdk.CaptureException(e);
-                return string.Empty;
+                return null;
             }
         }
 
@@ -418,7 +420,7 @@ namespace Amplifier
             span.Finish();
         }
 
-        public async System.Threading.Tasks.Task<string> GetListOfComplaints()
+        public async System.Threading.Tasks.Task<List<Complaint>> GetListOfComplaints()
         {
             var span = Sentry.Instance.GetTransaction("Backend").StartChild("complaint-get-list");
             try
@@ -428,13 +430,14 @@ namespace Amplifier
                 response.EnsureSuccessStatusCode();
                 if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
+                List<Complaint> complaintList = JsonConvert.DeserializeObject<List<Complaint>>( await response.Content.ReadAsStringAsync());
                 span.Finish();
-                return await response.Content.ReadAsStringAsync();
+                return complaintList;
             }
             catch (Exception e)
             {
                 SentrySdk.CaptureException(e);
-                return string.Empty;
+                return new List<Complaint>();
             }
         }
         
@@ -572,7 +575,7 @@ namespace Amplifier
             span.Finish();
         }        
         
-        public async System.Threading.Tasks.Task<string> GetListOfDocuments(string status)
+        public async System.Threading.Tasks.Task<List<Document>> GetListOfDocuments(string status)
         {
             var span = Sentry.Instance.GetTransaction("Backend").StartChild("document-get-list");
             try
@@ -583,17 +586,19 @@ namespace Amplifier
                 response.EnsureSuccessStatusCode();
                 if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
+                
+                List<Document> documents = JsonConvert.DeserializeObject<List<Document>>(await response.Content.ReadAsStringAsync());
                 span.Finish();
-                return await response.Content.ReadAsStringAsync();
+                return documents;
             }
             catch (Exception e)
             {
                 SentrySdk.CaptureException(e);
-                return string.Empty;
+                return new List<Document>();
             }
         }
 
-        public async System.Threading.Tasks.Task<string> GetDocument(string id)
+        public async System.Threading.Tasks.Task<Document> GetDocument(string id)
         {
             var span = Sentry.Instance.GetTransaction("Backend").StartChild("document-get");
             try
@@ -601,15 +606,16 @@ namespace Amplifier
                 string uri = String.Format(_wsConfig.B2BWSUrl.Replace("api/", "") + "documents-translator/{0}/", id);
                 HttpResponseMessage response = await _client.GetAsync(uri);
                 response.EnsureSuccessStatusCode();
-                span.Finish();
                 if (!response.IsSuccessStatusCode)
                     SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
-                return await response.Content.ReadAsStringAsync();
+                Document document = JsonConvert.DeserializeObject<Document>(await response.Content.ReadAsStringAsync());
+                span.Finish();
+                return document;
             }
             catch (Exception e)
             {
                 SentrySdk.CaptureException(e);
-                return string.Empty;
+                return null;
             }
         }
 
