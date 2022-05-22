@@ -46,7 +46,7 @@ namespace Amplifier
         {
             SentrySdk.Close();
         }
-        
+
         public ITransaction GetTransaction(string transactionName, string transactionOperation = null)
         {
             if (_transactions.ContainsKey(transactionName))
@@ -63,12 +63,12 @@ namespace Amplifier
         public void ConfigureScope(string wsUrl, string wsUser)
         {
             SentrySdk.ConfigureScope(scope =>
-            {
-                if(!string.IsNullOrEmpty(wsUrl))
-                    scope.SetTag("TRANSLATOR-URL", wsUrl);
-                if(!string.IsNullOrEmpty(wsUser))
-                    scope.SetTag("TRANSLATOR-USER", wsUser);
-            });
+                {
+                    if(!string.IsNullOrEmpty(wsUrl))
+                        scope.SetTag("TRANSLATOR-URL", wsUrl);
+                    if(!string.IsNullOrEmpty(wsUser))
+                        scope.SetTag("TRANSLATOR-USER", wsUser);
+                });
         }
     }
 }

@@ -64,9 +64,9 @@ namespace Amplifier
         public string products_total_gross { get; set; }
         public string total_net { get; set; }
         public string total_gross { get; set; }
-        public object paid { get; set; }
-        public object discount_amount { get; set; }
+        public decimal paid { get; set; }
+        public decimal discount_amount { get; set; }
         public string customer_note { get; set; }
-        public int shipment_type { get; set; }
+        public int? shipment_type { get; set; }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Amplifier
@@ -31,15 +32,26 @@ namespace Amplifier
         public string price_level_external_id { get; set; }
         public string login { get; set; }
         public string password { get; set; }
-        public string template { get; set; }
-        public bool mail_export  { get; set; }
-        public bool ftp_export  { get; set; }
-        public bool doc_export  { get; set; }
-        public bool offer_export  { get; set; }
         public decimal trade_credit_limit { get; set; }
         public decimal overdue_limit { get; set; }
         public decimal discount { get; set; }
         public string currency_code { get; set; }
+        public int id { get; set; }
+        public int overdue_settlements { get; set; }
+        public string currency_format { get; set; }
+        public string ftp_host { get; set; }
+        public string ftp_port { get; set; }
+        public string ftp_user { get; set; }
+        public string ftp_pass { get; set; }
+        public bool ftp_secure { get; set; }
+        public string type { get; set; }
+        public DateTime added_at { get; set; }
+        public DateTime? updated_at { get; set; }
+        public DateTime? first_login_at { get; set; }
+        public bool is_free_shipping { get; set; }
+        public int? account { get; set; }
+        public string default_address { get; set; }
+        public string currency { get; set; }
     }
 
     public class CustomerProductLogisticMinimum

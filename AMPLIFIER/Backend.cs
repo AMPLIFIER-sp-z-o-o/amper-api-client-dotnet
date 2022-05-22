@@ -572,6 +572,71 @@ namespace Amplifier
             span.Finish();
         }        
         
+        public async System.Threading.Tasks.Task<string> GetListOfDocuments(string status)
+        {
+            var span = Sentry.Instance.GetTransaction("Backend").StartChild("document-get-list");
+            try
+            {
+                HttpResponseMessage response =
+                    await _client.GetAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "documents-translator/?status=" +
+                                           status);
+                response.EnsureSuccessStatusCode();
+                if (!response.IsSuccessStatusCode)
+                    SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
+                span.Finish();
+                return await response.Content.ReadAsStringAsync();
+            }
+            catch (Exception e)
+            {
+                SentrySdk.CaptureException(e);
+                return string.Empty;
+            }
+        }
+
+        public async System.Threading.Tasks.Task<string> GetDocument(string id)
+        {
+            var span = Sentry.Instance.GetTransaction("Backend").StartChild("document-get");
+            try
+            {
+                string uri = String.Format(_wsConfig.B2BWSUrl.Replace("api/", "") + "documents-translator/{0}/", id);
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                response.EnsureSuccessStatusCode();
+                span.Finish();
+                if (!response.IsSuccessStatusCode)
+                    SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
+                return await response.Content.ReadAsStringAsync();
+            }
+            catch (Exception e)
+            {
+                SentrySdk.CaptureException(e);
+                return string.Empty;
+            }
+        }
+
+        public async System.Threading.Tasks.Task<string> ChangeDocumentStatus(string status, string id)
+        {
+            var span = Sentry.Instance.GetTransaction("Backend").StartChild("document-update");
+            try
+            {
+                var content = JsonConvert.SerializeObject(new {status = status});
+                string uri = String.Format(_wsConfig.B2BWSUrl.Replace("api/", "") + "documents-translator/{0}/", id);
+                var response = await _client.SendAsync(new HttpRequestMessage(new HttpMethod("PATCH"), uri)
+                {
+                    Content = new StringContent(content, Encoding.UTF8, "application/json")
+                });
+                response.EnsureSuccessStatusCode();
+                if (!response.IsSuccessStatusCode)
+                    SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
+                span.Finish();
+                return await response.Content.ReadAsStringAsync();
+            }
+            catch (Exception e)
+            {
+                SentrySdk.CaptureException(e);
+                return string.Empty;
+            }
+        }        
+        
         public void Dispose()
         {
             Sentry.Instance.GetTransaction("Backend").Finish();
