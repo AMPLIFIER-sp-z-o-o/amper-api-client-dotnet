@@ -30,6 +30,8 @@ namespace Amplifier
         public DateTime? delivery_date { get; set; }
         public decimal percentage_discount { get; set; }
         public string username { get; set; }
+        public string document_provider_short_name { get; set; }
+        public string document_type_name { get; set; }
     }
 
     public class DocumentLine
@@ -58,12 +60,13 @@ namespace Amplifier
         public string percentage_discount { get; set; }
         public int source_document_line { get; set; }
         public object source_price_level_desc { get; set; }
-        public DateTime created_at { get; set; }
-        public DateTime modified_at { get; set; }
-        public object document_promotion { get; set; }
-        public object promotion_condition { get; set; }
-        public object promotion_condition_relation { get; set; }
-        public object source_price_level { get; set; }        
+        public DateTime? created_at { get; set; }
+        public DateTime? modified_at { get; set; }
+        public string document_promotion { get; set; }
+        public string promotion_condition { get; set; }
+        public string promotion_condition_relation { get; set; }
+        public int? source_price_level { get; set; }        
+        public string price_level_external_id { get; set; }        
     }
 
     public class DocumentType

@@ -151,5 +151,18 @@ namespace Amplifier
     {
         public string external_id { get; set; }
     }
+    
+    public class UnitOfMeasure
+    {
+        public string product_external_id { get; set; }
+        public string external_id { get; set; }
+        public string name { get; set; }
+        public decimal converter { get; set; }
+        public bool can_be_split { get; set; }
+        public decimal cumulative_unit_ratio_splitter { get; set; }
+        public decimal unit_roundup { get; set; }
+        public decimal weight { get; set; }
+    }
+
 
 }

@@ -643,6 +643,24 @@ namespace Amplifier
             }
         }        
         
+        public async System.Threading.Tasks.Task SendUnitOfMeasuresAsync(List<UnitOfMeasure> units)
+        {
+            var span = Sentry.Instance.GetTransaction("Backend").StartChild("unit-of-measure-import");
+            try
+            {
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "unitofmeasure-import",
+                    new StringContent(JsonConvert.SerializeObject(units), Encoding.UTF8, "application/json"));
+                if (!response.IsSuccessStatusCode)
+                    SentrySdk.CaptureMessage(await response.Content.ReadAsStringAsync(), level: SentryLevel.Error);
+            }
+            catch (Exception e)
+            {
+                SentrySdk.CaptureException(e);
+            }
+
+            span.Finish();
+        }
+        
         public void Dispose()
         {
             Sentry.Instance.GetTransaction("Backend").Finish();
