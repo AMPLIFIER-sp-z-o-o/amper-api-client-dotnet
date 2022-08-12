@@ -76,6 +76,7 @@ namespace Amplifier
         public string description { get; set; }
         public string seo_tags { get; set; }
         public int order { get; set; }
+        public string updatable_fields = "";
     }
 
     public class ProductCategoryRelation
@@ -137,6 +138,11 @@ namespace Amplifier
         public decimal dimension_width { get; set; }
         public decimal dimension_height { get; set; }
         public decimal dimension_depth { get; set; }        
+        public bool is_product_saleable { get; set; }    
+        public int piggy_bank_budget { get; set; }
+        public int concession_a { get; set; }
+        public int concession_b { get; set; }
+        public int concession_c { get; set; }
 
     }
 
@@ -160,9 +166,7 @@ namespace Amplifier
         public decimal converter { get; set; }
         public bool can_be_split { get; set; }
         public decimal cumulative_unit_ratio_splitter { get; set; }
-        public decimal unit_roundup { get; set; }
+        public bool unit_roundup { get; set; }
         public decimal weight { get; set; }
     }
-
-
 }

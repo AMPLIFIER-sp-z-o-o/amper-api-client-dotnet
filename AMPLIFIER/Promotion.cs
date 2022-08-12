@@ -13,6 +13,7 @@ namespace Amplifier
         public string description { get; set; }
         public string short_code { get; set; }
         public bool is_enabled { get; set; }
+        public string updatable_fields = "";
     }
 
     public class PromotionCustomer

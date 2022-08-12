@@ -66,7 +66,8 @@ namespace Amplifier
         public string promotion_condition { get; set; }
         public string promotion_condition_relation { get; set; }
         public int? source_price_level { get; set; }        
-        public string price_level_external_id { get; set; }        
+        public string price_level_external_id { get; set; }     
+        public AppliedPromotion applied_promotion { get; set; }
     }
 
     public class DocumentType
@@ -85,6 +86,18 @@ namespace Amplifier
     {
         public DateTime date_start { get; set; }
         public object date_end { get; set; }
+    }
+
+    public class AppliedPromotion
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string short_code { get; set; }
+        public object external_id { get; set; }
+        public DateTime start { get; set; }
+        public DateTime end { get; set; }
+        public int priority { get; set; }
+        public string description { get; set; }
     }
 
 

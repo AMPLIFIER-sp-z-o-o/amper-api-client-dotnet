@@ -52,6 +52,11 @@ namespace Amplifier
         public int? account { get; set; }
         public string default_address { get; set; }
         public string currency { get; set; }
+        public string updatable_fields = "";
+        public string stock_location_external_id = "";
+        public DateTime? concession_a_valid_until { get; set; }
+        public DateTime? concession_b_valid_until { get; set; }
+        public DateTime? concession_c_valid_until { get; set; }
     }
 
     public class CustomerProductLogisticMinimum
@@ -74,6 +79,7 @@ namespace Amplifier
         public string voivodeship { get; set; }
         public string external_id { get; set; }
         public string customer_external_id { get; set; }
+        public string updatable_fields = "";
     }
 
     public class CustomerCategory
@@ -84,6 +90,7 @@ namespace Amplifier
         public string description { get; set; }
         public string seo_tags { get; set; }
         public int order { get; set; }
+        public string updatable_fields = "";
     }
 
     public class CustomerCategoryRelation

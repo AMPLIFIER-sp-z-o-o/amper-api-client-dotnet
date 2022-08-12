@@ -38,7 +38,7 @@ namespace Amplifier
             {
                 o.Dsn = SentryDsn;
                 o.Debug = false;
-                o.TracesSampleRate = 1.0;
+                o.TracesSampleRate = 0.1;
             });
         }
 
