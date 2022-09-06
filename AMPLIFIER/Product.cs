@@ -90,6 +90,7 @@ namespace Amplifier
     {
         public string external_id { get; set; }
         public string product_external_id { get; set; }
+        public string category_external_id { get; set; }
         public string customer_external_id { get; set; }
     }
 
@@ -139,7 +140,7 @@ namespace Amplifier
         public decimal dimension_height { get; set; }
         public decimal dimension_depth { get; set; }        
         public bool is_product_saleable { get; set; }    
-        public int piggy_bank_budget { get; set; }
+        public decimal piggy_bank_budget { get; set; }
         public int concession_a { get; set; }
         public int concession_b { get; set; }
         public int concession_c { get; set; }
@@ -168,5 +169,13 @@ namespace Amplifier
         public decimal cumulative_unit_ratio_splitter { get; set; }
         public bool unit_roundup { get; set; }
         public decimal weight { get; set; }
+    }
+    
+    public class DefaultPriceOverwriteForCategoryDiscount
+    {
+        public string external_id { get; set; }
+        public string price_level { get; set; }
+        public string category_discount { get; set; }
+        public int order { get; set; }
     }
 }

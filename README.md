@@ -34,18 +34,6 @@ You can add this package to your project by using:
 using Amplifier;
 ```
 
-You need to configure Sentry before any usage. First add package
-
-```shell
-dotnet add package Sentry
-```
-init Sentry connection before any other Amplifier object initiation
-
-```c#
-Amplifier.Sentry.SentryDsn = "https://xxxxxxxxxxxxxxxxxxx@xxxxxxx.ingest.sentry.io/xxxxxxxx";
-```
-
-
 - Create `AmplifierJWTAuth` object with your _username_ and _password_ and _url_ (url of your endpoint)
 
 ```cs

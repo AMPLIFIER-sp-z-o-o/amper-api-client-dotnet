@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text.RegularExpressions;
 
 namespace Amplifier.Utils
@@ -88,6 +89,17 @@ namespace Amplifier.Utils
             {
                 return false;
             }
+        }
+
+        public static bool IsTokenExpired(string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var decodedValue = handler.ReadJwtToken(token);
+
+            if (decodedValue.ValidTo < DateTime.UtcNow)
+                return false;
+            else
+                return true;
         }
     }
 }
