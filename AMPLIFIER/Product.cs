@@ -116,6 +116,7 @@ namespace Amplifier
         public string description { get; set; }
         public string short_code { get; set; }
         public string sku { get; set; }
+        public string ean { get; set; }
         public int vat { get; set; }
         public string available_on { get; set; }
         public bool is_published { get; set; }
