@@ -5,6 +5,7 @@ namespace Amplifier
 {
     public class Settlement{
         public string customer { get; set; }
+        public string account { get; set; }
         public string number { get; set; }
         public decimal value { get; set; }
         public decimal value_to_pay { get; set; }
