@@ -30,6 +30,7 @@ namespace Amplifier
         public string tax_id { get; set; }
         public string comments { get; set; }
         public string price_level_external_id { get; set; }
+        public string payment_form_external_id { get; set; }
         public string login { get; set; }
         public string password { get; set; }
         public decimal trade_credit_limit { get; set; }
@@ -107,4 +108,11 @@ namespace Amplifier
         public string customer_external_id { get; set; }
     }
 
+    public class PaymentForm
+    {
+        public string external_id { get; set; }
+        public string name { get; set; }
+        public bool is_cache { get; set; }
+        public int default_payment_date_in_days { get; set; }
+    }
 }

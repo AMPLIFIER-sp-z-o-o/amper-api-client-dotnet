@@ -667,6 +667,22 @@ namespace Amplifier
                 _wsConfig.JWTToken = JObject.Parse(responseContent);
             }
         }
+        
+        public async System.Threading.Tasks.Task SendPaymentFormsAsync(List<PaymentForm> payment_forms)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "payment-forms-import",
+                    new StringContent(JsonConvert.SerializeObject(payment_forms), Encoding.UTF8, "application/json"));
+                if (!response.IsSuccessStatusCode)
+                    await CreateLogEntryAsync(LogSeverity.Error, await response.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+            }
+        }
 
         public void Dispose()
         {
