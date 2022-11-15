@@ -145,7 +145,7 @@ namespace Amplifier
         public int concession_a { get; set; }
         public int concession_b { get; set; }
         public int concession_c { get; set; }
-        public decimal capacit { get; set; }
+        public decimal capacity { get; set; }
 
     }
 
@@ -171,7 +171,7 @@ namespace Amplifier
         public decimal cumulative_unit_ratio_splitter { get; set; }
         public bool unit_roundup { get; set; }
         public decimal weight { get; set; }
-        public decimal capacit { get; set; }
+        public decimal capacity { get; set; }
 
     }
     
