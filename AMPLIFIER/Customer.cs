@@ -104,6 +104,7 @@ namespace Amplifier
     public class CustomerSalesRepresentative
     {
         public string external_id { get; set; }
+        public string sales_representative_identifier { get; set; }
         public string customer_category_external_id { get; set; }
         public string customer_external_id { get; set; }
     }

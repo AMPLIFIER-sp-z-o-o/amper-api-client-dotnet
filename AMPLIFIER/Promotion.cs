@@ -4,7 +4,7 @@ namespace Amplifier
 {
     public class Promotion
     {
-
+        public int id { get; set; }
         public string external_id { get; set; }
         public string name { get; set; }
         public DateTime start { get; set; }
@@ -14,6 +14,8 @@ namespace Amplifier
         public string short_code { get; set; }
         public bool is_enabled { get; set; }
         public string updatable_fields = "";
+        public string external_identifier { get; set; }
+        public string internal_description { get; set; }
     }
 
     public class PromotionCustomer

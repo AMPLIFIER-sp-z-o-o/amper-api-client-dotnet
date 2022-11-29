@@ -683,6 +683,22 @@ namespace Amplifier
                 await CreateLogEntryAsync(LogSeverity.Error, e.Message);
             }
         }
+        
+        public async System.Threading.Tasks.Task SendCustomerSalesRepresentativeRelationAsync(List<CustomerSalesRepresentative> sf_customer_relations)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "customer-sales-representative-import",
+                    new StringContent(JsonConvert.SerializeObject(sf_customer_relations), Encoding.UTF8, "application/json"));
+                if (!response.IsSuccessStatusCode)
+                    await CreateLogEntryAsync(LogSeverity.Error, await response.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+            }
+        }
 
         public void Dispose()
         {

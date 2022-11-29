@@ -29,6 +29,7 @@ namespace Amplifier
         public bool is_promotion_reward { get; set; }
         public int product { get; set; }
         public object promotion_condition { get; set; }
+        public Promotion promotion { get; set; }
     }
 
     public class ShippingAddress
