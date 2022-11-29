@@ -4,15 +4,15 @@ namespace Amplifier
 {
     public class Promotion
     {
-        public int id { get; set; }
+        public int? id { get; set; }
         public string external_id { get; set; }
         public string name { get; set; }
-        public DateTime start { get; set; }
-        public DateTime end { get; set; }
-        public int priority { get; set; }
+        public DateTime? start { get; set; }
+        public DateTime? end { get; set; }
+        public int? priority { get; set; }
         public string description { get; set; }
         public string short_code { get; set; }
-        public bool is_enabled { get; set; }
+        public bool? is_enabled { get; set; }
         public string updatable_fields = "";
         public string external_identifier { get; set; }
         public string internal_description { get; set; }

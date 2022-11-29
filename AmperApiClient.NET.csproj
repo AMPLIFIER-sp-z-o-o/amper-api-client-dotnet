@@ -10,10 +10,11 @@
     <Copyright>Copyright 2021 AMPLIFIER sp. z o.o.</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageTags>Amplifier</PackageTags>
-    <PackageVersion>1.1.31</PackageVersion>
-    <AssemblyVersion>1.1.31</AssemblyVersion>
-    <FileVersion>1.1.31</FileVersion>
+    <PackageVersion>1.1.33</PackageVersion>
+    <AssemblyVersion>1.1.33</AssemblyVersion>
+    <FileVersion>1.1.33</FileVersion>
     <PackageProjectUrl>https://ampliapps.com</PackageProjectUrl>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
