@@ -622,7 +622,7 @@ namespace Amplifier
                 LogEntry logEntry = new LogEntry();
                 logEntry.level = level;
                 logEntry.message = message;
-                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "translator/log-entry",
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "translator/log-entry/",
                     new StringContent(JsonConvert.SerializeObject(logEntry), Encoding.UTF8, "application/json"));
                 if (!response.IsSuccessStatusCode)
                     Console.WriteLine(await response.Content.ReadAsStringAsync());
