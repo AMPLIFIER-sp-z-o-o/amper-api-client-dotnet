@@ -28,8 +28,8 @@ namespace Amplifier
         public string tax_rate { get; set; }
         public bool is_promotion_reward { get; set; }
         public int product { get; set; }
-        public object promotion_condition { get; set; }
-        public Promotion promotion { get; set; }
+        public int? promotion_condition { get; set; }
+        public Promotion? promotion { get; set; }
     }
 
     public class ShippingAddress
