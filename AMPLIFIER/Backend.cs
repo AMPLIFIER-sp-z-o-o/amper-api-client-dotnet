@@ -699,6 +699,22 @@ namespace Amplifier
                 await CreateLogEntryAsync(LogSeverity.Error, e.Message);
             }
         }
+        
+        public async System.Threading.Tasks.Task SendSchedulesAsync(List<SchedulerEntry> schedules)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "schedules-import",
+                    new StringContent(JsonConvert.SerializeObject(schedules), Encoding.UTF8, "application/json"));
+                if (!response.IsSuccessStatusCode)
+                    await CreateLogEntryAsync(LogSeverity.Error, await response.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+            }
+        }        
 
         public void Dispose()
         {
