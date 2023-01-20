@@ -58,6 +58,7 @@ namespace Amplifier
         public DateTime? concession_a_valid_until { get; set; }
         public DateTime? concession_b_valid_until { get; set; }
         public DateTime? concession_c_valid_until { get; set; }
+        public string default_sales_rep_identifier = "";
     }
 
     public class CustomerProductLogisticMinimum
@@ -113,7 +114,7 @@ namespace Amplifier
     {
         public string external_id { get; set; }
         public string name { get; set; }
-        public bool is_cache { get; set; }
+        public bool is_cash { get; set; }
         public int default_payment_date_in_days { get; set; }
     }
 }

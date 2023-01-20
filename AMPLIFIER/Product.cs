@@ -117,6 +117,7 @@ namespace Amplifier
         public string short_code { get; set; }
         public string sku { get; set; }
         public string ean { get; set; }
+        public string brand_short_code { get; set; }
         public int vat { get; set; }
         public string available_on { get; set; }
         public bool is_published { get; set; }
@@ -146,7 +147,6 @@ namespace Amplifier
         public int concession_b { get; set; }
         public int concession_c { get; set; }
         public decimal capacity { get; set; }
-
     }
 
 
