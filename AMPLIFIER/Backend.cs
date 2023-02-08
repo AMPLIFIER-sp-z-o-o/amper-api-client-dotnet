@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -622,7 +621,7 @@ namespace Amplifier
                 LogEntry logEntry = new LogEntry();
                 logEntry.level = level;
                 logEntry.message = message;
-                var response = await _client.PostAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "translator/log-entry/",
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "translator/log-entry",
                     new StringContent(JsonConvert.SerializeObject(logEntry), Encoding.UTF8, "application/json"));
                 if (!response.IsSuccessStatusCode)
                     Console.WriteLine(await response.Content.ReadAsStringAsync());
@@ -715,6 +714,22 @@ namespace Amplifier
                 await CreateLogEntryAsync(LogSeverity.Error, e.Message);
             }
         }        
+        
+        public async System.Threading.Tasks.Task SendCustomerTasksAsync(List<CustomerTask> schedules)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "customer-tasks-import",
+                    new StringContent(JsonConvert.SerializeObject(schedules), Encoding.UTF8, "application/json"));
+                if (!response.IsSuccessStatusCode)
+                    await CreateLogEntryAsync(LogSeverity.Error, await response.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+            }
+        }                
 
         public void Dispose()
         {
