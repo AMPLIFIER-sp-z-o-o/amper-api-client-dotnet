@@ -56,8 +56,8 @@ namespace Amplifier
         public string group { get; set; }
         public string product_external_id { get; set; }
         public int product_vat { get; set; }
-        public string base_price { get; set; }
-        public string percentage_discount { get; set; }
+        public decimal base_price { get; set; }
+        public decimal percentage_discount { get; set; }
         public int source_document_line { get; set; }
         public object source_price_level_desc { get; set; }
         public DateTime? created_at { get; set; }
