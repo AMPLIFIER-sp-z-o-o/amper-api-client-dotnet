@@ -37,8 +37,8 @@ namespace Amplifier
     public class DocumentLine
     {
         public int id { get; set; }
+        public string external_id { get; set; }
         public string document { get; set; }
-        public string product { get; set; }
         public string product_symbol { get; set; }
         public string product_ean { get; set; }
         public string product_name { get; set; }

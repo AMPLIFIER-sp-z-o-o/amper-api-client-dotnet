@@ -6,11 +6,11 @@ namespace Amplifier
     public class CustomerTask
     {
         public string external_id { get; set; }
-        public string customer_external_id { get; set; }
         public string name { get; set; }
         public DateTime? date_start { get; set; }
         public DateTime? date_end { get; set; }
-        public List<CustomerTaskGoal> customers { get; set; }
+        public List<CustomerTaskGoal> goals { get; set; }
+        public List<TaskCustomers> customers { get; set; }
     }
 
     public class CustomerTaskGoal
@@ -19,4 +19,9 @@ namespace Amplifier
         public string type { get; set; }
         public decimal goal_value { get; set; }
     }
+    
+    public class TaskCustomers
+    {
+        public string customer_external_id { get; set; }
+    }    
 }
