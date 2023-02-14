@@ -147,6 +147,7 @@ namespace Amplifier
         public int concession_b { get; set; }
         public int concession_c { get; set; }
         public decimal capacity { get; set; }
+        public string sorting_column { get; set; }
     }
 
 
