@@ -10,7 +10,7 @@ namespace Amplifier
         public List<DocumentLine> document_lines { get; set; }
         public string customer_external_id { get; set; }
         public Customer customer { get; set; }
-        public int? document_provider { get; set; }
+        public DocumentProvider? document_provider { get; set; }
         public Visit visit { get; set; }
         public DocumentType document_type { get; set; }
         public object stock_location { get; set; }
@@ -32,6 +32,8 @@ namespace Amplifier
         public string username { get; set; }
         public string document_provider_short_name { get; set; }
         public string document_type_name { get; set; }
+        public string payment_form_external_id { get; set; }
+        public string is_external_document { get; set; }
     }
 
     public class DocumentLine
@@ -98,6 +100,13 @@ namespace Amplifier
         public DateTime end { get; set; }
         public int priority { get; set; }
         public string description { get; set; }
+    }
+
+    public class DocumentProvider
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string short_name { get; set; }
     }
 
 
