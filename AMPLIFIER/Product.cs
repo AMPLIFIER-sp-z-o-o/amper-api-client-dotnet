@@ -101,10 +101,16 @@ namespace Amplifier
             this.key = key;
             this.atr_name = atr_name;
             this.atr_val = atr_val;
+            this.is_b2b = true;
+            this.is_msf = true;
+            this.is_b2c = true;
         }
         public string key { get; set; }
         public string atr_name { get; set; }
         public string atr_val { get; set; }
+        public bool is_b2b { get; set; }
+        public bool is_msf { get; set; }
+        public bool is_b2c { get; set; }
     }
 
     public class Product

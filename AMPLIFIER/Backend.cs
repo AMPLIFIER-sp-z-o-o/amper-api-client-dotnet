@@ -230,6 +230,22 @@ namespace Amplifier
             }
         }
 
+        public async System.Threading.Tasks.Task SendAlignDocumentAsync(Document document)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "document-align",
+                    new StringContent(JsonConvert.SerializeObject(document), Encoding.UTF8, "application/json"));
+                if (!response.IsSuccessStatusCode)
+                    await CreateLogEntryAsync(LogSeverity.Error, await response.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+            }
+        }
+
         public async System.Threading.Tasks.Task SendSettlementsAsync(List<Settlement> settlements)
         {
             try
