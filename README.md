@@ -40,20 +40,20 @@ using Amplifier;
 AmplifierJWTAuth amplifierJWTAuth = new AmplifierJWTAuth(USERNAME, PASSWORD, URL);
 ```
 
-- use it's `getToken()` method to authenticate and get your JWT Token
+- Use it's `getToken()` method to authenticate and get your JWT Token
 
 ```cs
 b2BWSConfig.JWTToken = await amplifierJWTAuth.getToken();
 ```
 
-- add AMPER WS URL
+- Add AMPER WS URL
 
 ```cs
 b2BWSConfig.b2BWSUrl = "https://example-amper-b2b-ws.com"
 ```
 
-- create an import class where you can:
+- Create an import class where you can:
   - fetch data you want to send
   - map it to Amplifier classes (`Product`, `Settlement`...)
   - use `Backend` methods to send it
-- when creating `Backend` pass `WSConfig` with your _JWTToken_ and _B2BWSUrl_ you wish to communicate with
+- When creating `Backend` pass `WSConfig` with your _JWTToken_ and _B2BWSUrl_ you wish to communicate with
