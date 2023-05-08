@@ -56,4 +56,4 @@ b2BWSConfig.b2BWSUrl = "https://example-amper-b2b-ws.com"
   - fetch data you want to send
   - map it to Amplifier classes (`Product`, `Settlement`...)
   - use `Backend` methods to send it
-- When creating `Backend` pass `WSConfig` with your _JWTToken_ and _B2BWSUrl_ you wish to communicate with
+- When creating `Backend` pass `WSConfig` with your _JWTToken_ and _B2BWSUrl_ you wish to communicate with 
