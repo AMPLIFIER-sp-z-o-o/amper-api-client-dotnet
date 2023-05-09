@@ -154,6 +154,9 @@ namespace Amplifier
         public int concession_c { get; set; }
         public decimal capacity { get; set; }
         public string sorting_column { get; set; }
+        public bool is_bestseller { get; set; }
+        public bool is_for_sale { get; set; }
+        public string status_description { get; set; }
     }
 
 
