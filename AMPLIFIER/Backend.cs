@@ -747,7 +747,7 @@ namespace Amplifier
             }
         }
 
-        public async System.Threading.Tasks.Task SendManufacturerAsync(List<Brand> producers)
+        public async System.Threading.Tasks.Task SendManufacturerAsync(List<Manufacturer> producers)
         {
             try
             {
