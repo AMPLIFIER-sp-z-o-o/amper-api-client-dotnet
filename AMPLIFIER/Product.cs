@@ -199,7 +199,7 @@ namespace Amplifier
         public string slug { get; set; }
         public int order { get; set; }
         public string description { get; set; }
-        public string seo_tags{ get; set; }
+        public string seo_tags { get; set; }
         public bool is_hidden { get; set; }
         public bool is_featured { get; set;}
         public string short_code { get; set; }
