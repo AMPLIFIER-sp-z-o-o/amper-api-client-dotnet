@@ -192,4 +192,29 @@ namespace Amplifier
         public string category_discount { get; set; }
         public int order { get; set; }
     }
+    public class Manufacturer
+    {
+        public string external_id { get; set; }
+        public string name { get; set; }
+        public string slug { get; set; }
+        public int order { get; set; }
+        public string description { get; set; }
+        public string seo_tags{ get; set; }
+        public bool is_hidden { get; set; }
+        public bool is_featured { get; set;}
+        public string short_code { get; set; }
+    }
+    public class Brand
+    {
+        public string external_id { get; set; }
+        public string manufacturer_external_id { get; set; }
+        public string name { get; set; }
+        public string slug { get; set; }
+        public int order { get; set; }
+        public string description { get; set; }
+        public string seo_tags { get; set; }
+        public bool is_hidden { get; set; }
+        public bool is_featured { get; set; }
+        public string short_code { get; set; }
+    }
 }
