@@ -747,13 +747,13 @@ namespace Amplifier
             }
         }
 
-        public async System.Threading.Tasks.Task SendManufacturerAsync(List<Manufacturer> producers)
+        public async System.Threading.Tasks.Task SendManufacturersAsync(List<Manufacturer> manufacturers)
         {
             try
             {
                 await ValidateJWTToken();
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "manufacturers-import",
-                    new StringContent(JsonConvert.SerializeObject(producers), Encoding.UTF8, "application/json"));
+                    new StringContent(JsonConvert.SerializeObject(manufacturers), Encoding.UTF8, "application/json"));
                 if (!response.IsSuccessStatusCode)
                     await CreateLogEntryAsync(LogSeverity.Error, await response.Content.ReadAsStringAsync());
             }
@@ -763,7 +763,7 @@ namespace Amplifier
             }
         }
 
-        public async System.Threading.Tasks.Task SendManufacturerBrandAsync(List<Brand> brands)
+        public async System.Threading.Tasks.Task SendManufacturerBrandsAsync(List<Brand> brands)
         {
             try
             {
