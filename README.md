@@ -22,7 +22,7 @@ You can add this package to your project by using:
 
   ```xml
   <ItemGroup>
-      <PackageReference Include="AmperApiClient.NET" Version="1.1.49" />
+      <PackageReference Include="AmperApiClient.NET" Version="1.1.50" />
   </ItemGroup>
   ```
 
