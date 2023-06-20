@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using Amplifier.Utils;
+using log4net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -40,7 +43,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -57,7 +60,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -73,7 +76,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -84,13 +87,12 @@ namespace Amplifier
                 await ValidateJWTToken();
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "stock-locations-import",
                     new StringContent(JsonConvert.SerializeObject(stockLocations), Encoding.UTF8, "application/json"));
-
                 if (!response.IsSuccessStatusCode)
                     await CreateLogEntryAsync(LogSeverity.Error, await response.Content.ReadAsStringAsync());
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -106,7 +108,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -122,7 +124,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -139,7 +141,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -156,7 +158,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -173,7 +175,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -190,7 +192,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -206,7 +208,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -226,7 +228,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -242,7 +244,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -258,7 +260,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -290,7 +292,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -321,7 +323,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
                 return e.Message;
             }
         }
@@ -342,7 +344,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
                 return new List<Order>();
             }
         }
@@ -362,7 +364,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
                 return null;
             }
         }
@@ -385,7 +387,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
                 return string.Empty;
             }
         }
@@ -402,7 +404,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -421,7 +423,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
                 return new List<Complaint>();
             }
         }
@@ -445,7 +447,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
                 return string.Empty;
             }
 
@@ -463,7 +465,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -480,7 +482,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
         
@@ -496,7 +498,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -512,7 +514,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -528,7 +530,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -544,7 +546,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }        
         
@@ -565,7 +567,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
                 return new List<Document>();
             }
         }
@@ -585,7 +587,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
                 return null;
             }
         }
@@ -608,7 +610,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
                 return string.Empty;
             }
         }        
@@ -625,29 +627,82 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
-        
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public async System.Threading.Tasks.Task CreateLogEntryAsync(string level, string message)
         {
             try
             {
                 await ValidateJWTToken();
-                LogEntry logEntry = new LogEntry();
-                logEntry.level = level;
-                logEntry.message = message;
-                var response = await _client.PostAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "translator/log-entry",
-                    new StringContent(JsonConvert.SerializeObject(logEntry), Encoding.UTF8, "application/json"));
-                if (!response.IsSuccessStatusCode)
-                    Console.WriteLine(await response.Content.ReadAsStringAsync());
+
+                XmlDocument log4netConfig = new XmlDocument();
+                log4netConfig.Load(File.OpenRead("log4net.config"));
+                var repo = log4net.LogManager.CreateRepository(Assembly.GetEntryAssembly(), typeof(log4net.Repository.Hierarchy.Hierarchy));
+                log4net.Config.XmlConfigurator.Configure(repo, log4netConfig["log4net"]);
+
+                switch (level)
+                {
+                    case "info":
+                        log.Info(message);
+                        break;
+                    case "warning":
+                        log.Warn(message);
+                        break;
+                    case "debug":
+                        log.Debug(message);
+                        break;
+                    case "error":
+                        log.Error(message);
+                        break;
+                    default:
+                        log.Error(message);
+                        break;
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
         }
-        
+        public async System.Threading.Tasks.Task CreateLogEntryAsync(string level, string message, Exception ex)
+        {
+            try
+            {
+                await ValidateJWTToken();
+
+                XmlDocument log4netConfig = new XmlDocument();
+                log4netConfig.Load(File.OpenRead("log4net.config"));
+                var repo = log4net.LogManager.CreateRepository(Assembly.GetEntryAssembly(), typeof(log4net.Repository.Hierarchy.Hierarchy));
+                log4net.Config.XmlConfigurator.Configure(repo, log4netConfig["log4net"]);
+
+                switch (level)
+                {
+                    case "info":
+                        log.Info(message, ex);
+                        break;
+                    case "warning":
+                        log.Warn(message, ex);
+                        break;
+                    case "debug":
+                        log.Debug(message, ex);
+                        break;
+                    case "error":
+                        log.Error(message, ex);
+                        break;
+                    default:
+                        log.Error(message, ex);
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
         public async System.Threading.Tasks.Task SendDefaultPriceOverwriteForCategoryDiscountAsync(List<DefaultPriceOverwriteForCategoryDiscount> overwrites)
         {
             try
@@ -660,7 +715,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -695,7 +750,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
         
@@ -711,7 +766,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
         
@@ -727,7 +782,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -743,7 +798,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -759,7 +814,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
@@ -775,7 +830,7 @@ namespace Amplifier
             }
             catch (Exception e)
             {
-                await CreateLogEntryAsync(LogSeverity.Error, e.Message);
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
 
