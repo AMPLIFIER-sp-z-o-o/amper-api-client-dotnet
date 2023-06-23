@@ -10,9 +10,9 @@
     <Copyright>Copyright 2021 AMPLIFIER sp. z o.o.</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageTags>Amplifier</PackageTags>
-    <PackageVersion>1.1.52</PackageVersion>
-    <AssemblyVersion>1.1.52</AssemblyVersion>
-    <FileVersion>1.1.52</FileVersion>
+    <PackageVersion>1.1.53</PackageVersion>
+    <AssemblyVersion>1.1.53</AssemblyVersion>
+    <FileVersion>1.1.53</FileVersion>
     <PackageProjectUrl>https://ampliapps.com</PackageProjectUrl>
     <Nullable>enable</Nullable>
     <LangVersion>8</LangVersion>
@@ -30,7 +30,6 @@
     <None Update="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
     </None>
     <None Update="README.md">
       <Pack>True</Pack>
