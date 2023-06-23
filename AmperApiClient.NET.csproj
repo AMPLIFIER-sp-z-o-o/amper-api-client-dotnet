@@ -29,7 +29,7 @@
   <ItemGroup>
     <None Update="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <PackagePath>lib\net5.0\</PackagePath>
+      <PackagePath>\</PackagePath>
       <Pack>True</Pack>
     </None>
     <None Update="README.md">
