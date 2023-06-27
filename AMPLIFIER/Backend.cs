@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using Amplifier.Utils;
-using log4net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -1038,18 +1037,12 @@ namespace Amplifier
                 await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
-
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         public async System.Threading.Tasks.Task CreateLogEntryAsync(string level, string message)
         {
             try
             {
                 await ValidateJWTToken();
-
-                XmlDocument log4netConfig = new XmlDocument();
-                log4netConfig.Load(File.OpenRead("log4net.config"));
-                var repo = log4net.LogManager.CreateRepository(Assembly.GetEntryAssembly(), typeof(log4net.Repository.Hierarchy.Hierarchy));
-                log4net.Config.XmlConfigurator.Configure(repo, log4netConfig["log4net"]);
 
                 switch (level)
                 {
@@ -1081,24 +1074,19 @@ namespace Amplifier
             {
                 await ValidateJWTToken();
 
-                XmlDocument log4netConfig = new XmlDocument();
-                log4netConfig.Load(File.OpenRead("log4net.config"));
-                var repo = log4net.LogManager.CreateRepository(Assembly.GetEntryAssembly(), typeof(log4net.Repository.Hierarchy.Hierarchy));
-                log4net.Config.XmlConfigurator.Configure(repo, log4netConfig["log4net"]);
-
                 switch (level)
                 {
                     case "info":
-                        log.Info(message, ex);
+                        log.Info(ex, message);
                         break;
                     case "warning":
-                        log.Warn(message, ex);
+                        log.Warn(ex, message);
                         break;
                     case "debug":
-                        log.Debug(message, ex);
+                        log.Debug(ex, message);
                         break;
                     case "error":
-                        log.Error(message, ex);
+                        log.Error(ex, message);
                         break;
                     default:
                         log.Error(message, ex);
