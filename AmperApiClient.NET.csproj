@@ -10,9 +10,9 @@
     <Copyright>Copyright 2021 AMPLIFIER sp. z o.o.</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageTags>Amplifier</PackageTags>
-    <PackageVersion>1.1.57</PackageVersion>
-    <AssemblyVersion>1.1.57</AssemblyVersion>
-    <FileVersion>1.1.57</FileVersion>
+    <PackageVersion>1.1.58</PackageVersion>
+    <AssemblyVersion>1.1.58</AssemblyVersion>
+    <FileVersion>1.1.58</FileVersion>
     <PackageProjectUrl>https://ampliapps.com</PackageProjectUrl>
     <Nullable>enable</Nullable>
     <LangVersion>8</LangVersion>
@@ -31,6 +31,11 @@
 	  <PackagePath>\</PackagePath>
 	  <Pack>True</Pack>
     </None>
+	<None Update="NLog.xsd">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <PackagePath>\</PackagePath>
+	  <Pack>True</Pack>
+	</None>
     <None Update="README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>

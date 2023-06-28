@@ -1089,7 +1089,7 @@ namespace Amplifier
                         log.Error(ex, message);
                         break;
                     default:
-                        log.Error(message, ex);
+                        log.Error(ex, message);
                         break;
                 }
             }
