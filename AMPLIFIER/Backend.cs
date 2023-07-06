@@ -427,14 +427,14 @@ namespace Amplifier
                 {
                     watch.Stop();
                     await CreateLogEntryAsync(LogSeverity.Error,
-                        "FAILURE while sending align document after " + watch.ElapsedMilliseconds + " ms; "
+                        "FAILURE while sending settlements after " + watch.ElapsedMilliseconds + " ms; "
                         + await response.Content.ReadAsStringAsync());
                 }
                 else
                 {
                     watch.Stop();
                     await CreateLogEntryAsync(LogSeverity.Info,
-                        "Success while sending align document after " + watch.ElapsedMilliseconds + " ms.");
+                        "Success while sending settlements after " + watch.ElapsedMilliseconds + " ms.");
                 }
             }
             catch (Exception e)
@@ -651,7 +651,7 @@ namespace Amplifier
                 {
                     watch.Stop();
                     await CreateLogEntryAsync(LogSeverity.Info,
-                        "Success while changing order status after " + watch.ElapsedMilliseconds + " ms.");
+                        "Success while sending addresses after " + watch.ElapsedMilliseconds + " ms.");
                 }
             }
             catch (Exception e)
