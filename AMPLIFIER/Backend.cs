@@ -1321,6 +1321,168 @@ namespace Amplifier
                 await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
+        public async System.Threading.Tasks.Task AddCustomerToCategory(string customer_id, string category_id)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                await CreateLogEntryAsync(LogSeverity.Info, "About to add customer to category.");
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+
+                var content = new StringContent("{\n  \"customer\": \"" + customer_id + "\",\n  \"category\": \"" + category_id + "\",\n }", Encoding.UTF8, "application/json");
+
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "customer-categories-relation", content);
+                if (!response.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Error,
+                        "FAILURE while adding customer to category after " + watch.ElapsedMilliseconds + " ms; "
+                        + await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Info,
+                        "Success while adding customer to category after " + watch.ElapsedMilliseconds + " ms.");
+                }
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
+            }
+        }
+        public async System.Threading.Tasks.Task AddTranslatorRelation(string objectType, string externalId, string internalId)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                await CreateLogEntryAsync(LogSeverity.Info, "About to add translator relation.");
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+
+                var content = new StringContent("{\n  \"object_type\": \"" + objectType + "\",\n  \"external_id\": \"" + externalId + "\",\n  \"internal_id\": " + internalId + "\n}", Encoding.UTF8, "application/json");
+
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "translator/add-relation", content);
+                if (!response.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Error,
+                        "FAILURE while adding translator relation after " + watch.ElapsedMilliseconds + " ms; "
+                        + await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Info,
+                        "Success while adding translator relation after " + watch.ElapsedMilliseconds + " ms.");
+                }
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
+            }
+        }
+        public async System.Threading.Tasks.Task<List<CustomerForExport>> GetListOfCustomers()
+        {
+            try
+            {
+                await ValidateJWTToken();
+                await CreateLogEntryAsync(LogSeverity.Info, "About to get a list of customers.");
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                HttpResponseMessage response =
+                    await _client.GetAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "customers-translator/");
+                response.EnsureSuccessStatusCode();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Error,
+                        "FAILURE while getting list of customers after " + watch.ElapsedMilliseconds + " ms; "
+                        + await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Info,
+                        "Success while getting list of customers after " + watch.ElapsedMilliseconds + " ms.");
+                }
+
+                List<CustomerForExport> customers = JsonConvert.DeserializeObject<List<CustomerForExport>>(await response.Content.ReadAsStringAsync());
+                return customers;
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
+                return new List<CustomerForExport>();
+            }
+        }
+        public async System.Threading.Tasks.Task<string> ChangeCashDocumentStatus(string status, string id)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                await CreateLogEntryAsync(LogSeverity.Info, "About to change cash document status for id " + id);
+                var content = JsonConvert.SerializeObject(new { status = status });
+                string uri = String.Format(_wsConfig.B2BWSUrl.Replace("api/", "") + "cash-documents-translator/{0}/", id);
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                var response = await _client.SendAsync(new HttpRequestMessage(new HttpMethod("PATCH"), uri)
+                {
+                    Content = new StringContent(content, Encoding.UTF8, "application/json")
+                });
+                response.EnsureSuccessStatusCode();
+                if (!response.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Error,
+                        "FAILURE while changing cash document status after " + watch.ElapsedMilliseconds + " ms; "
+                        + await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Info,
+                        "Success while changing cash document status after " + watch.ElapsedMilliseconds + " ms.");
+                }
+                return await response.Content.ReadAsStringAsync();
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
+                return string.Empty;
+            }
+        }
+        public async System.Threading.Tasks.Task<List<CashDocument>> GetListOfCashDocuments(string status)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                await CreateLogEntryAsync(LogSeverity.Info, "About to get a list of cash documents.");
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                HttpResponseMessage response =
+                    await _client.GetAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "cash-documents-translator/?status=" + status);
+                response.EnsureSuccessStatusCode();
+                if (!response.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Error,
+                        "FAILURE while getting list of cash documents after " + watch.ElapsedMilliseconds + " ms; "
+                        + await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Info,
+                        "Success while getting list of cash documents after " + watch.ElapsedMilliseconds + " ms.");
+                }
+
+                List<CashDocument> documents = JsonConvert.DeserializeObject<List<CashDocument>>(await response.Content.ReadAsStringAsync());
+                return documents;
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
+                return new List<CashDocument>();
+            }
+        }
 
         public void Dispose()
         {
