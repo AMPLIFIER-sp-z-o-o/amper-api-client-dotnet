@@ -92,6 +92,7 @@ namespace Amplifier
         public string product_external_id { get; set; }
         public string category_external_id { get; set; }
         public string customer_external_id { get; set; }
+        public bool excluded { get; set; }
     }
 
     public class ProductAttributes
