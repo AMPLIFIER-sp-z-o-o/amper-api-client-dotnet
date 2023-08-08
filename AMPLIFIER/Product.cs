@@ -203,7 +203,9 @@ namespace Amplifier
         public bool is_hidden { get; set; }
         public bool is_featured { get; set;}
         public string short_code { get; set; }
+        public string updatable_fields { get; set; }
     }
+    
     public class Brand
     {
         public string external_id { get; set; }
@@ -216,5 +218,6 @@ namespace Amplifier
         public bool is_hidden { get; set; }
         public bool is_featured { get; set; }
         public string short_code { get; set; }
+        public string updatable_fields { get; set; }
     }
 }
