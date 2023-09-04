@@ -158,6 +158,7 @@ namespace Amplifier
         public bool is_bestseller { get; set; }
         public bool is_for_sale { get; set; }
         public string status_description { get; set; }
+        public decimal minimal_price { get; set; }
     }
 
 
