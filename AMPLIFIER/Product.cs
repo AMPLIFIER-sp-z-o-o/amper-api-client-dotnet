@@ -105,6 +105,8 @@ namespace Amplifier
             this.is_b2b = true;
             this.is_msf = true;
             this.is_b2c = true;
+            this.enabled_for_filtering = true;
+            this.show_on_tile = false;
         }
         public string key { get; set; }
         public string atr_name { get; set; }
@@ -112,6 +114,8 @@ namespace Amplifier
         public bool is_b2b { get; set; }
         public bool is_msf { get; set; }
         public bool is_b2c { get; set; }
+        public bool enabled_for_filtering { get; set; }
+        public bool show_on_tile { get; set; }
     }
 
     public class Product
