@@ -108,6 +108,17 @@ namespace Amplifier
             this.enabled_for_filtering = true;
             this.show_on_tile = false;
         }
+        public ProductAttributes(string key, string atr_name, string atr_val, bool enabled_for_filtering, bool show_on_tile)
+        {
+            this.key = key;
+            this.atr_name = atr_name;
+            this.atr_val = atr_val;
+            this.is_b2b = true;
+            this.is_msf = true;
+            this.is_b2c = true;
+            this.enabled_for_filtering = enabled_for_filtering;
+            this.show_on_tile = show_on_tile;
+        }
         public string key { get; set; }
         public string atr_name { get; set; }
         public string atr_val { get; set; }
