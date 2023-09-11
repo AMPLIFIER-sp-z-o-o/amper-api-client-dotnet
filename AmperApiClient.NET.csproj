@@ -7,12 +7,12 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Package for communicating with AMPER API</Description>
     <Version>1.1.0</Version>
-    <Copyright>Copyright 2021 AMPLIFIER sp. z o.o.</Copyright>
+    <Copyright>Copyright 2023 AMPLIFIER sp. z o.o.</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageTags>Amplifier</PackageTags>
-    <PackageVersion>1.1.67</PackageVersion>
-    <AssemblyVersion>1.1.67</AssemblyVersion>
-    <FileVersion>1.1.67</FileVersion>
+    <PackageVersion>1.1.68</PackageVersion>
+    <AssemblyVersion>1.1.68</AssemblyVersion>
+    <FileVersion>1.1.68</FileVersion>
     <PackageProjectUrl>https://ampliapps.com</PackageProjectUrl>
     <Nullable>enable</Nullable>
     <LangVersion>8</LangVersion>

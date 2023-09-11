@@ -1512,6 +1512,37 @@ namespace Amplifier
                 await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
+        
+        public async System.Threading.Tasks.Task SendOrdersAsync(List<Order> orders)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                IEnumerable<List<Order>> toSend = WSUtilities.SplitList(orders);
+                await CreateLogEntryAsync(LogSeverity.Info, "About to send " + orders.Count() + " orders.");
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                int errors = 0;
+                foreach (List<Order> p in toSend)
+                {
+                    var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "orders-import",
+                        new StringContent(JsonConvert.SerializeObject(p), Encoding.UTF8, "application/json"));
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        await CreateLogEntryAsync(LogSeverity.Error,
+                            "FAILURE while sending a batch of " + p.Count() + " orders; "
+                            + await response.Content.ReadAsStringAsync());
+                        errors++;
+                    }
+                }
+                watch.Stop();
+                await CreateLogEntryAsync(LogSeverity.Info,
+                    "Sending orders finished after " + watch.ElapsedMilliseconds + " ms with " + errors + " errors.");
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
+            }
+        }
 
         public void Dispose()
         {
