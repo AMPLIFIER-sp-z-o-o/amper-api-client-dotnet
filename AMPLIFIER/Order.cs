@@ -18,6 +18,8 @@ namespace Amplifier
         public int id { get; set; }
         public List<object> attributes { get; set; }
         public string product_external_id { get; set; }
+        public string product_short_code { get; set; }
+        public string external_id { get; set; }
         public string product_name { get; set; }
         public string product_sku { get; set; }
         public decimal quantity { get; set; }
