@@ -49,6 +49,8 @@ namespace Amplifier
 
     public class Order
     {
+        public int? id { get; set; }
+        public string external_id { get; set; }
         public string token { get; set; }
         public List<OrderLine> lines { get; set; }
         public string customer_external_id { get; set; }
