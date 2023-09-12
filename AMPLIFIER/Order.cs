@@ -69,5 +69,8 @@ namespace Amplifier
         public decimal discount_amount { get; set; }
         public string customer_note { get; set; }
         public int? shipment_type { get; set; }
+        public string order_number { get; set; }
+        public string order_type { get; set; }
+        public string form_of_payment { get; set; }
     }
 }
