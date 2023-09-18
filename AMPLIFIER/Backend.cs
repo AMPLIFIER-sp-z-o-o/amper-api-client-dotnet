@@ -138,7 +138,7 @@ namespace Amplifier
                 {
                     watch.Stop();
                     await CreateLogEntryAsync(LogSeverity.Info,
-                        "Success while sending prices after " + watch.ElapsedMilliseconds + " ms.");
+                        "Success while sending stock locations after " + watch.ElapsedMilliseconds + " ms.");
                 }
             }
             catch (Exception e)
