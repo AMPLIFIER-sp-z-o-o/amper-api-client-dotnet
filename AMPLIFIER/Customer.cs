@@ -16,6 +16,7 @@ namespace Amplifier
         public string voivodeship { get; set; }
         public string tax_id { get; set; }
         public List<Customer> customers { get; set; }
+        public bool is_locked_for_sale { get; set; }
     }
     public class Customer
     {
