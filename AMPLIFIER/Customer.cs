@@ -16,7 +16,6 @@ namespace Amplifier
         public string voivodeship { get; set; }
         public string tax_id { get; set; }
         public List<Customer> customers { get; set; }
-        public bool is_locked_for_sale { get; set; }
     }
     public class Customer
     {
@@ -61,6 +60,7 @@ namespace Amplifier
         public DateTime? concession_c_valid_until { get; set; }
         public string default_sales_rep_identifier = "";
         public bool check_minimal_price { get; set; }
+        public bool is_locked_for_sale { get; set; }
     }
 
     public class CustomerProductLogisticMinimum
