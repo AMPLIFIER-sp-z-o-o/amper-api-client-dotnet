@@ -36,6 +36,7 @@ namespace Amplifier
 
     public class ShippingAddress
     {
+        public string external_id { get; set; }
         public int id { get; set; }
         public object deleted { get; set; }
         public string name { get; set; }
