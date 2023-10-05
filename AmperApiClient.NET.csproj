@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFrameworks>net5.0;net452;netcoreapp3.1</TargetFrameworks>
     <PackageId>AmperApiClient.NET</PackageId>
     <Authors>AMPLIFIER</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -10,9 +10,9 @@
     <Copyright>Copyright 2023 AMPLIFIER sp. z o.o.</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageTags>Amplifier</PackageTags>
-    <PackageVersion>1.1.77</PackageVersion>
-    <AssemblyVersion>1.1.77</AssemblyVersion>
-    <FileVersion>1.1.77</FileVersion>
+    <PackageVersion>1.1.78</PackageVersion>
+    <AssemblyVersion>1.1.78</AssemblyVersion>
+    <FileVersion>1.1.78</FileVersion>
     <PackageProjectUrl>https://ampliapps.com</PackageProjectUrl>
     <Nullable>enable</Nullable>
     <LangVersion>8</LangVersion>
@@ -36,7 +36,7 @@
 	  <PackagePath>\</PackagePath>
 	  <Pack>True</Pack>
 	</None>
-    <None Update="README.md">
+    <None Include="README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>

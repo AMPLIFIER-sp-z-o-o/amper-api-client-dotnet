@@ -4,7 +4,9 @@ Nuget Package for communicating with Amplifier API.
 
 ## Requirements
 
-.net core version 5
+.NET 5.0
+.NET Core 3.1
+.NET Framework 4.5.2
 
 ## Install
 
@@ -22,7 +24,7 @@ You can add this package to your project by using:
 
   ```xml
   <ItemGroup>
-      <PackageReference Include="AmperApiClient.NET" Version="1.1.75" />
+      <PackageReference Include="AmperApiClient.NET" Version="1.1.78" />
   </ItemGroup>
   ```
 
