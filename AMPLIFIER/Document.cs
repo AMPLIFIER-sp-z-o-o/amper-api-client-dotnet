@@ -34,6 +34,11 @@ namespace Amplifier
         public string document_type_name { get; set; }
         public string payment_form_external_id { get; set; }
         public string is_external_document { get; set; }
+        public string sales_rep_identifier { get; set; }
+        public string sales_rep_first_name { get; set; }
+        public string sales_rep_last_name { get; set; }
+        public string sales_rep_email { get; set; }
+        public string sales_rep_phone { get; set; }
     }
 
     public class DocumentLine
