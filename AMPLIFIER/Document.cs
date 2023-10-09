@@ -39,6 +39,7 @@ namespace Amplifier
         public string sales_rep_last_name { get; set; }
         public string sales_rep_email { get; set; }
         public string sales_rep_phone { get; set; }
+        public string document_metadata { get; set; }
     }
 
     public class DocumentLine
@@ -74,6 +75,7 @@ namespace Amplifier
         public string promotion_condition_relation { get; set; }
         public int? source_price_level { get; set; }        
         public string price_level_external_id { get; set; }     
+        public string line_metadata { get; set; }     
         public AppliedPromotion applied_promotion { get; set; }
     }
 
