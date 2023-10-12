@@ -175,6 +175,7 @@ namespace Amplifier
         public string status_description { get; set; }
         public decimal minimal_price { get; set; }
         public int product_subtype { get; set; }
+        public string sanitized_description { get; set; }
     }
 
 
