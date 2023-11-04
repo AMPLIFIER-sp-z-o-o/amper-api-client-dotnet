@@ -61,6 +61,7 @@ namespace Amplifier
         public string default_sales_rep_identifier = "";
         public bool check_minimal_price { get; set; }
         public bool is_locked_for_sale { get; set; }
+        public string ean { get; set; }
     }
 
     public class CustomerProductLogisticMinimum
