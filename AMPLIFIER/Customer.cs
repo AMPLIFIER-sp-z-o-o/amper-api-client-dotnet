@@ -179,5 +179,6 @@ namespace Amplifier
         public string email { get; set; }
         public string status { get; set; }
         public string keycloak_id { get; set; }
+        public string supervisor { get; set; }
     }
 }

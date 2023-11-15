@@ -40,6 +40,7 @@ namespace Amplifier
         public string sales_rep_email { get; set; }
         public string sales_rep_phone { get; set; }
         public string document_metadata { get; set; }
+        public CoordsDetails coords_details { get; set; }
     }
 
     public class DocumentLine
@@ -77,6 +78,13 @@ namespace Amplifier
         public string price_level_external_id { get; set; }     
         public string line_metadata { get; set; }     
         public AppliedPromotion applied_promotion { get; set; }
+        public bool is_promotion_reward { get; set; }
+        public int? piggy_bank_budget { get; set; }
+        public decimal? piggy_bank_budget_built { get; set; }
+        public decimal? user_discount { get; set; }
+        public int product { get; set; }
+        public int? budget { get; set; }
+        public int? source_target_goal { get; set; }        
     }
 
     public class DocumentType
@@ -93,8 +101,16 @@ namespace Amplifier
 
     public class Visit
     {
+        public int id { get; set; }
+        public string customer_name { get; set; }
+        public string customer_short_name { get; set; }
+        public string sales_representatives { get; set; }
         public DateTime date_start { get; set; }
-        public object date_end { get; set; }
+        public DateTime date_end { get; set; }
+        public string username { get; set; }
+        public bool virtual_visit { get; set; }
+        public CoordsDetails coords_details { get; set; }
+        public int customer { get; set; }
     }
 
     public class AppliedPromotion
@@ -107,6 +123,9 @@ namespace Amplifier
         public DateTime end { get; set; }
         public int priority { get; set; }
         public string description { get; set; }
+        public string internal_description { get; set; }
+        public string external_identifier { get; set; }
+        public bool is_required { get; set; }
     }
 
     public class DocumentProvider
@@ -116,5 +135,21 @@ namespace Amplifier
         public string short_name { get; set; }
     }
 
+    public class Coords
+    {
+        public int speed { get; set; }
+        public int heading { get; set; }
+        public int accuracy { get; set; }
+        public decimal altitude { get; set; }
+        public decimal latitude { get; set; }
+        public decimal longitude { get; set; }
+        public decimal altitudeAccuracy { get; set; }
+    }
+
+    public class CoordsDetails
+    {
+        public Coords coords { get; set; }
+        public decimal timestamp { get; set; }
+    }
 
 }
