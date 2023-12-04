@@ -105,8 +105,8 @@ namespace Amplifier
         public string customer_name { get; set; }
         public string customer_short_name { get; set; }
         public string sales_representatives { get; set; }
-        public DateTime date_start { get; set; }
-        public DateTime date_end { get; set; }
+        public DateTime? date_start { get; set; }
+        public DateTime? date_end { get; set; }
         public string username { get; set; }
         public bool virtual_visit { get; set; }
         public CoordsDetails coords_details { get; set; }
