@@ -137,19 +137,19 @@ namespace Amplifier
 
     public class Coords
     {
-        public int speed { get; set; }
-        public int heading { get; set; }
-        public int accuracy { get; set; }
-        public decimal altitude { get; set; }
-        public decimal latitude { get; set; }
-        public decimal longitude { get; set; }
-        public decimal altitudeAccuracy { get; set; }
+        public string speed { get; set; }
+        public string heading { get; set; }
+        public string accuracy { get; set; }
+        public string altitude { get; set; }
+        public string latitude { get; set; }
+        public string longitude { get; set; }
+        public string altitudeAccuracy { get; set; }
     }
 
     public class CoordsDetails
     {
         public Coords coords { get; set; }
-        public decimal timestamp { get; set; }
+        public string timestamp { get; set; }
     }
 
 }
