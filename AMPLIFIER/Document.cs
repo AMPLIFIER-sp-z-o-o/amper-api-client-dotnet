@@ -79,7 +79,7 @@ namespace Amplifier
         public string line_metadata { get; set; }     
         public AppliedPromotion applied_promotion { get; set; }
         public bool is_promotion_reward { get; set; }
-        public int? piggy_bank_budget { get; set; }
+        public decimal? piggy_bank_budget { get; set; }
         public decimal? piggy_bank_budget_built { get; set; }
         public decimal? user_discount { get; set; }
         public int product { get; set; }
