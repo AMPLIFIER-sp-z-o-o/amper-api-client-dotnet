@@ -8,6 +8,7 @@ namespace Amplifier
         public int product_id;
         public string alt = null;
         public string image = null;
+        public string file_name = null;
         public int order = 1;
         public int thumbnail_width;
     }
