@@ -1074,6 +1074,12 @@ namespace Amplifier
             {
                 await ValidateJWTToken();
 
+                if (ex.HResult == -2146233088)
+                {
+                    level = LogSeverity.Info;
+                    message = "[i] " + message;
+                }
+
                 switch (level)
                 {
                     case "info":
