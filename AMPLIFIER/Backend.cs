@@ -1074,7 +1074,7 @@ namespace Amplifier
             {
                 await ValidateJWTToken();
 
-                if (ex.HResult == -2146233088 && ex.Message == "¯¹danie zosta³o przerwane: Nie mo¿na utworzyæ bezpiecznego kana³u SSL/TLS.") // translator selvista-export
+                if (ex.HResult == -2146233088 && ex.Message == "ï¿½ï¿½danie zostaï¿½o przerwane: Nie moï¿½na utworzyï¿½ bezpiecznego kanaï¿½u SSL/TLS.") // translator selvista-export
                 {
                     level = LogSeverity.Info;
                     message = "[i] " + message;
@@ -1583,6 +1583,38 @@ namespace Amplifier
                     await CreateLogEntryAsync(LogSeverity.Info,
                         "Success while sending images after " + watch.ElapsedMilliseconds + " ms.");
                 }
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
+            }
+        }
+        
+        public async System.Threading.Tasks.Task TransferDocument(int document_id, string sales_rep_identifier)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                await CreateLogEntryAsync(LogSeverity.Info, "About to transfer document.");
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+
+                var content = new StringContent("{\n  \"document_id\": " + document_id + ",\n  \"sales_rep_identifier\": \"" + sales_rep_identifier + "\"\n}", Encoding.UTF8, "application/json");
+
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "translator/transfer-document", content);
+                if (!response.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Error,
+                        "FAILURE while adding transferring document after " + watch.ElapsedMilliseconds + " ms; "
+                        + await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Info,
+                        "Success while adding transferring document after " + watch.ElapsedMilliseconds + " ms.");
+                }                
+                
             }
             catch (Exception e)
             {
