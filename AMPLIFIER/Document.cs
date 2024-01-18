@@ -39,7 +39,7 @@ namespace Amplifier
         public string sales_rep_last_name { get; set; }
         public string sales_rep_email { get; set; }
         public string sales_rep_phone { get; set; }
-        public string document_metadata { get; set; }
+        public object document_metadata { get; set; }
         public CoordsDetails coords_details { get; set; }
     }
 
