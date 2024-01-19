@@ -1074,7 +1074,7 @@ namespace Amplifier
             {
                 await ValidateJWTToken();
 
-                if (ex.HResult == -2146233088 && ex.Message == "��danie zosta�o przerwane: Nie mo�na utworzy� bezpiecznego kana�u SSL/TLS.") 
+                if (ex.HResult == -2146233088 && ex.Message == "Wystąpił błąd podczas wysyłania żądania.")
                 {
                     level = LogSeverity.Info;
                     message = "[i] " + message;
