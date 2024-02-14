@@ -513,13 +513,15 @@ namespace Amplifier
                         + await response.Content.ReadAsStringAsync());
                     return await response.Content.ReadAsStringAsync();
                 }
-                else
-                {
-                    watch.Stop();
-                    await CreateLogEntryAsync(LogSeverity.Info,
-                        "Success while sending file after " + watch.ElapsedMilliseconds + " ms.");
+
+                var stringData = await response.Content.ReadAsStringAsync();
+                ProductImage imageObj = (ProductImage)JsonConvert.DeserializeObject(stringData)!;
+                watch.Stop();
+                await CreateLogEntryAsync(LogSeverity.Info,
+                    "Success while sending file after " + watch.ElapsedMilliseconds + " ms.");
+                if(imageObj.product_id > 0)
                     return "OK";
-                }
+                return "Image was not assigned to product.";
             }
             catch (Exception e)
             {
