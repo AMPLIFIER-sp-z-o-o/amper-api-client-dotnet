@@ -1076,13 +1076,13 @@ namespace Amplifier
             {
                 await ValidateJWTToken();
 
-                if (ex.HResult == -2146233088 && ex.Message == "��danie zosta�o przerwane: Nie mo�na utworzy� bezpiecznego kana�u SSL/TLS.") // translator selvista-export
+                if (ex.HResult == -2146233088 && ex.Message == "Wystąpił błąd podczas wysyłania żądania.")
                 {
                     level = LogSeverity.Info;
                     message = "[i] " + message;
                 }
 
-                if (ex.HResult == -2147467259 && ex.Message == "Nieznany host. (tedi-ws.ampli-solutions.com:443)") // translator kd
+                if (ex.HResult == -2147467259 && ex.Message.StartsWith("Nieznany host."))
                 {
                     level = LogSeverity.Info;
                     message = "[i] " + message;

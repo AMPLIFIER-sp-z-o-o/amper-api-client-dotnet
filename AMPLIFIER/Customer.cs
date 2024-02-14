@@ -39,6 +39,7 @@ namespace Amplifier
         public string currency_code { get; set; }
         public int id { get; set; }
         public int overdue_settlements { get; set; }
+        public int max_num_of_overdue_settlements { get; set; }
         public string currency_format { get; set; }
         public string ftp_host { get; set; }
         public string ftp_port { get; set; }
