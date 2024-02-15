@@ -515,7 +515,7 @@ namespace Amplifier
                 }
 
                 var stringData = await response.Content.ReadAsStringAsync();
-                ProductImage imageObj = (ProductImage)JsonConvert.DeserializeObject(stringData)!;
+                ProductImage imageObj = JsonConvert.DeserializeObject<ProductImage>(stringData)!;
                 watch.Stop();
                 await CreateLogEntryAsync(LogSeverity.Info,
                     "Success while sending file after " + watch.ElapsedMilliseconds + " ms.");
