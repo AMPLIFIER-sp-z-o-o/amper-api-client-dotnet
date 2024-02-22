@@ -1343,7 +1343,7 @@ namespace Amplifier
                 await CreateLogEntryAsync(LogSeverity.Info, "About to add customer to category.");
                 var watch = System.Diagnostics.Stopwatch.StartNew();
 
-                var content = new StringContent("{\n  \"customer\": \"" + customer_id + "\",\n  \"category\": \"" + category_id + "\",\n }", Encoding.UTF8, "application/json");
+                var content = new StringContent("{\n  \"customer\": \"" + customer_id + "\",\n  \"category\": \"" + category_id + "\"\n }", Encoding.UTF8, "application/json");
 
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "customer-categories-relation", content);
                 if (!response.IsSuccessStatusCode)
