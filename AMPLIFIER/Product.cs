@@ -77,7 +77,7 @@ namespace Amplifier
         public string description { get; set; }
         public string seo_tags { get; set; }
         public int order { get; set; }
-        public string updatable_fields = "";
+        public string updatable_fields { get; set; }
     }
 
     public class ProductCategoryRelation
@@ -148,7 +148,7 @@ namespace Amplifier
         public decimal weight { get; set; }
         public string default_unit_of_measure { get; set; }
         public string external_id { get; set; }
-        public string updatable_fields = "";
+        public string updatable_fields { get; set; }
         public string cumulative_unit_of_measure { get; set; }
         public decimal cumulative_converter { get; set; }
         public bool can_be_split { get; set; }
