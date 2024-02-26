@@ -43,6 +43,7 @@ namespace Amplifier
         public int order { get; set; }
         public bool is_global { get; set; }
         public bool is_enabled { get; set; }
+        public bool is_promotional { get; set; }
     }
 
     public class PriceLevelAssigment
