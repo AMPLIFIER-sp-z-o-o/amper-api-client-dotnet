@@ -63,6 +63,8 @@ namespace Amplifier
         public bool check_minimal_price { get; set; }
         public bool is_locked_for_sale { get; set; }
         public string ean { get; set; }
+        public decimal? latitude { get; set; }
+        public decimal? longitude { get; set; }
     }
 
     public class CustomerProductLogisticMinimum
