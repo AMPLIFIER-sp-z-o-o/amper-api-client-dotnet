@@ -21,6 +21,7 @@ namespace Amplifier
     {
         public string external_id { get; set; }
         public string name { get; set; }
+        public string friendly_name { get; set; }
         public string short_name { get; set; }
         public string primary_email { get; set; }
         public string phone { get; set; }
