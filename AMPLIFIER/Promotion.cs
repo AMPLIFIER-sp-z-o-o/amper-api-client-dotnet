@@ -31,4 +31,51 @@ namespace Amplifier
         public string promotion_external_id { get; set; }
         public string customer_category_external_id { get; set; }
     }
+    
+    public class ConditionRelation
+    {
+        public string external_id { get; set; }
+        public string promotion_external_id { get; set; }
+        public string relation { get; set; }
+        public int? order { get; set; }
+    }
+    
+    public class ConditionRelationPromotionCondition
+    {
+        public string external_id { get; set; }
+        public string condition_relation_external_id { get; set; }
+        public string promotion_condition_external_id { get; set; }
+        public int? order { get; set; }
+    }
+    
+    public class PromotionCondition
+    {
+        public string external_id { get; set; }
+        public string name { get; set; }
+    }
+    
+    public class PromotionConditionItem
+    {
+        public string external_id { get; set; }
+        public string promotion_condition_external_id { get; set; }
+        public string product_external_id { get; set; }
+        public string product_category_external_id { get; set; }
+        public decimal value { get; set; }
+        public string value_type { get; set; }
+        public decimal value_max { get; set; }
+    }
+    
+    public class PromotionRewards
+    {
+        public string external_id { get; set; }
+        public string promotion_external_id { get; set; }
+        public string condition_relation_external_id { get; set; }
+        public string product_external_id { get; set; }
+        public string product_category_external_id { get; set; }
+        public decimal quantity { get; set; }
+        public decimal price { get; set; }
+        public string value_type { get; set; }
+        public decimal reward_value { get; set; }
+        public string reward { get; set; }
+    }
 }
