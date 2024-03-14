@@ -1623,5 +1623,150 @@ namespace Amplifier
                 await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
+        
+        public async System.Threading.Tasks.Task SendConditionRelationAsync(List<ConditionRelation> conditions)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                await CreateLogEntryAsync(LogSeverity.Info, "About to send " + conditions.Count() + " promotions.");
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "promotions-conndition-relation-import",
+                    new StringContent(JsonConvert.SerializeObject(conditions), Encoding.UTF8, "application/json"));
+                if (!response.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Error,
+                        "FAILURE while sending conditions after " + watch.ElapsedMilliseconds + " ms; "
+                        + await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Info,
+                        "Success while sending conditions after " + watch.ElapsedMilliseconds + " ms.");
+                }
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
+            }
+        }
+        
+        public async System.Threading.Tasks.Task SendConditionRelationPromotionConditionAsync(List<ConditionRelationPromotionCondition> conditions)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                await CreateLogEntryAsync(LogSeverity.Info, "About to send " + conditions.Count() + " ConditionRelationPromotionCondition.");
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "promotions-conndition-relation-promotion-condition-import",
+                    new StringContent(JsonConvert.SerializeObject(conditions), Encoding.UTF8, "application/json"));
+                if (!response.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Error,
+                        "FAILURE while sending conndition-relation-promotion-condition after " + watch.ElapsedMilliseconds + " ms; "
+                        + await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Info,
+                        "Success while sending conndition-relation-promotion-condition after " + watch.ElapsedMilliseconds + " ms.");
+                }
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
+            }
+        }
+        
+        public async System.Threading.Tasks.Task SendPromotionConditionAsync(List<PromotionCondition> conditions)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                await CreateLogEntryAsync(LogSeverity.Info, "About to send " + conditions.Count() + " PromotionCondition.");
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "promotions-promotion-condition-import",
+                    new StringContent(JsonConvert.SerializeObject(conditions), Encoding.UTF8, "application/json"));
+                if (!response.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Error,
+                        "FAILURE while sending PromotionCondition after " + watch.ElapsedMilliseconds + " ms; "
+                        + await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Info,
+                        "Success while sending PromotionCondition after " + watch.ElapsedMilliseconds + " ms.");
+                }
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
+            }
+        }
+        
+        public async System.Threading.Tasks.Task SendPromotionConditionItemAsync(List<PromotionConditionItem> conditions)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                await CreateLogEntryAsync(LogSeverity.Info, "About to send " + conditions.Count() + " PromotionConditionItem.");
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "promotions-promotion-condition-item-import",
+                    new StringContent(JsonConvert.SerializeObject(conditions), Encoding.UTF8, "application/json"));
+                if (!response.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Error,
+                        "FAILURE while sending PromotionConditionItem after " + watch.ElapsedMilliseconds + " ms; "
+                        + await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Info,
+                        "Success while sending PromotionConditionItem after " + watch.ElapsedMilliseconds + " ms.");
+                }
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
+            }
+        }
+        
+        public async System.Threading.Tasks.Task SendPromotionRewardsAsync(List<PromotionRewards> rewards)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                await CreateLogEntryAsync(LogSeverity.Info, "About to send " + rewards.Count() + " PromotionRewards.");
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "promotions-rewards-import",
+                    new StringContent(JsonConvert.SerializeObject(rewards), Encoding.UTF8, "application/json"));
+                if (!response.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Error,
+                        "FAILURE while sending PromotionRewards after " + watch.ElapsedMilliseconds + " ms; "
+                        + await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Info,
+                        "Success while sending PromotionRewards after " + watch.ElapsedMilliseconds + " ms.");
+                }
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
+            }
+        }
     }
 }
