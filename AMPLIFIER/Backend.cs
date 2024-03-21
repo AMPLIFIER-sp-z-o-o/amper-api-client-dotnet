@@ -988,26 +988,20 @@ namespace Amplifier
                 {
                     Content = new StringContent(content, Encoding.UTF8, "application/json")
                 });
-                response.EnsureSuccessStatusCode();
+
+                var responseContent = await response.Content.ReadAsStringAsync();
+                watch.Stop();
                 if (!response.IsSuccessStatusCode)
-                {
-                    watch.Stop();
-                    await CreateLogEntryAsync(LogSeverity.Error,
-                        "FAILURE while changing document status after " + watch.ElapsedMilliseconds + " ms; "
-                        + await response.Content.ReadAsStringAsync());
-                }
+                    await CreateLogEntryAsync(LogSeverity.Error, "FAILURE while changing document status after " + watch.ElapsedMilliseconds + " ms; " + responseContent);
                 else
-                {
-                    watch.Stop();
-                    await CreateLogEntryAsync(LogSeverity.Info,
-                        "Success while changing document status after " + watch.ElapsedMilliseconds + " ms.");
-                }
-                return await response.Content.ReadAsStringAsync();
+                    await CreateLogEntryAsync(LogSeverity.Info, "Success while changing document status after " + watch.ElapsedMilliseconds + " ms.");
+
+                return responseContent;
             }
             catch (Exception e)
             {
                 await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
-                return string.Empty;
+                return e.Message;
             }
         }        
         
