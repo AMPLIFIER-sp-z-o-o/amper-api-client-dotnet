@@ -35,6 +35,7 @@ namespace Amplifier
     public class ConditionRelation
     {
         public string external_id { get; set; }
+        public string parent_relation_external_id { get; set; }
         public string promotion_external_id { get; set; }
         public string relation { get; set; }
         public int? order { get; set; }
@@ -42,8 +43,7 @@ namespace Amplifier
     
     public class ConditionRelationPromotionCondition
     {
-        public string external_id { get; set; }
-        public string parent_relation_external_id { get; set; }
+        public string external_id { get; set; }        
         public string condition_relation_external_id { get; set; }
         public string promotion_condition_external_id { get; set; }
         public int? order { get; set; }
