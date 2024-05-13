@@ -31,6 +31,7 @@ namespace Amplifier
         public string tax_id { get; set; }
         public string comments { get; set; }
         public string price_level_external_id { get; set; }
+        public string complementary_price_level_external_id { get; set; }
         public string payment_form_external_id { get; set; }
         public string login { get; set; }
         public string password { get; set; }
