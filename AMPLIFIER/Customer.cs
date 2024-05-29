@@ -67,6 +67,7 @@ namespace Amplifier
         public string ean { get; set; }
         public decimal? latitude { get; set; }
         public decimal? longitude { get; set; }
+        public bool export_customer { get; set; }
     }
 
     public class CustomerProductLogisticMinimum
