@@ -11,8 +11,8 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageTags>Amplifier</PackageTags>
     <PackageVersion>1.1.109</PackageVersion>
-    <AssemblyVersion>1.1.109</AssemblyVersion>
-    <FileVersion>1.1.109</FileVersion>
+    <AssemblyVersion>1.1.110</AssemblyVersion>
+    <FileVersion>1.1.110</FileVersion>
     <PackageProjectUrl>https://ampliapps.com</PackageProjectUrl>
     <Nullable>enable</Nullable>
     <LangVersion>8</LangVersion>
