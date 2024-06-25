@@ -68,6 +68,10 @@ namespace Amplifier
         public decimal? latitude { get; set; }
         public decimal? longitude { get; set; }
         public bool export_customer { get; set; }
+        public decimal? value_restrictions { get; set; }
+        public decimal? value_restrictions_limit { get; set; }
+        public decimal? weight_restrictions { get; set; }
+        public decimal? weight_restrictions_limit { get; set; }     
     }
 
     public class CustomerProductLogisticMinimum
