@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Amplifier
 {
@@ -66,6 +67,7 @@ namespace Amplifier
         public decimal value_max { get; set; }
         public bool create_temporary_category { get; set; }
         public string temporary_category_name { get; set; }
+        public List<string> temporary_category_products { get; set; }
     }
     
     public class PromotionRewards
