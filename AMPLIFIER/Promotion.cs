@@ -64,6 +64,8 @@ namespace Amplifier
         public decimal value { get; set; }
         public string value_type { get; set; }
         public decimal value_max { get; set; }
+        public bool create_temporary_category { get; set; }
+        public string temporary_category_name { get; set; }
     }
     
     public class PromotionRewards
