@@ -40,6 +40,7 @@ namespace Amplifier
         public string promotion_external_id { get; set; }
         public string relation { get; set; }
         public int? order { get; set; }
+        public int? multiply_reward { get; set; }
     }
     
     public class ConditionRelationPromotionCondition
