@@ -1144,7 +1144,7 @@ namespace Amplifier
 
         private async Task RefreshToken()
         {
-            var response = await _client.PostAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "/auth/token-refresh/",
+            var response = await _client.PostAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "auth/token-refresh/",
                 new StringContent(JsonConvert.SerializeObject(_wsConfig.JWTToken), Encoding.UTF8, "application/json"));
             if (!response.IsSuccessStatusCode)
                 await CreateLogEntryAsync(LogSeverity.Error, "JWT token refresh failed; " + await response.Content.ReadAsStringAsync());
