@@ -17,6 +17,7 @@ namespace Amplifier
         public string updatable_fields = "";
         public string external_identifier { get; set; }
         public string internal_description { get; set; }
+        public bool? replace_gratifications { get; set; }
     }
 
     public class PromotionCustomer
