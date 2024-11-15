@@ -1339,7 +1339,7 @@ namespace Amplifier
 
                 var content = new StringContent("{\n  \"customer\": \"" + customer_id + "\",\n  \"category\": \"" + category_id + "\"\n }", Encoding.UTF8, "application/json");
 
-                var response = await _client.PostAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "customer-categories-relation", content);
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "customer-categories-relation/", content);
                 if (!response.IsSuccessStatusCode)
                 {
                     watch.Stop();
