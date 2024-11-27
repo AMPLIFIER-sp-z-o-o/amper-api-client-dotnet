@@ -31,6 +31,5 @@ namespace Amplifier
         public Customer? created_by { get; set; }
         public string customer_external_id { get; set; }
         public Customer? customer { get; set; }
-        public Document? document { get; set; }
     }
 }
