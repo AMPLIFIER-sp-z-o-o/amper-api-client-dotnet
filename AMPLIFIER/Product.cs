@@ -180,6 +180,7 @@ namespace Amplifier
         public string sanitized_description { get; set; }
         public string cn_code { get; set; }
         public int order { get; set; }
+        public decimal purchase_price { get; set; }
     }
 
 
