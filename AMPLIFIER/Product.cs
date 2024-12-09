@@ -23,6 +23,7 @@ namespace Amplifier
         public string start_date { get; set; }
         public string end_date { get; set; }
         public int order { get; set; }
+        public bool allow_override_minimal_price { get; set; }
     }
 
     public class CategoryDiscount
@@ -34,6 +35,7 @@ namespace Amplifier
         public int order { get; set; }
         public string start_date { get; set; }
         public string end_date { get; set; }
+        public bool allow_override_minimal_price { get; set; }
     }
 
     public class PriceLevel
