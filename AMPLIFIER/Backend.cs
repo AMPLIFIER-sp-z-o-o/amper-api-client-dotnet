@@ -1790,6 +1790,39 @@ namespace Amplifier
             {
                 await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
-        }        
+        }
+
+        public async System.Threading.Tasks.Task<List<CustomerNote>> GetListOfCustomerNotesAsync(string date)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                await CreateLogEntryAsync(LogSeverity.Info, "About to get list of customer notes for day " + date);
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                HttpResponseMessage response =
+                    await _client.GetAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "customer-notes/?added_at__gte=" + date);
+                response.EnsureSuccessStatusCode();
+                if (!response.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Error,
+                        "FAILURE while getting list of customer notes after " + watch.ElapsedMilliseconds + " ms; "
+                        + await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Info,
+                        "Success while getting list of customer notes after " + watch.ElapsedMilliseconds + " ms.");
+                }
+                List<CustomerNote> customernote = JsonConvert.DeserializeObject<List<CustomerNote>>(await response.Content.ReadAsStringAsync());
+                return customernote;
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
+                return new List<CustomerNote>();
+            }
+        }
     }
 }

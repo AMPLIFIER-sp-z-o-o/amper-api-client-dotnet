@@ -71,8 +71,8 @@ namespace Amplifier
         public decimal? value_restrictions { get; set; }
         public decimal? value_restrictions_limit { get; set; }
         public decimal? weight_restrictions { get; set; }
-        public decimal? weight_restrictions_limit { get; set; }     
-        public decimal? free_shipping_from { get; set; }     
+        public decimal? weight_restrictions_limit { get; set; }
+        public decimal? free_shipping_from { get; set; }
     }
 
     public class CustomerProductLogisticMinimum
@@ -191,5 +191,24 @@ namespace Amplifier
         public string status { get; set; }
         public string keycloak_id { get; set; }
         public string supervisor { get; set; }
+    }
+
+    public class CustomerNote
+    {
+        public int id { get; set; }
+        public string author { get; set; }
+        public int customer { get; set; }
+        public string body { get; set; }
+        public CustomerNoteType note_type { get; set; }
+        public DateTime added_at { get; set; }
+        public string created_by { get; set; }
+    }
+
+    public class CustomerNoteType
+    {
+        public int id { get; set; }
+        public string type { get; set; }
+        public string value { get; set; }
+        public int order {  get; set; }
     }
 }
