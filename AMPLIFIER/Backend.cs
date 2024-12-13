@@ -273,8 +273,26 @@ namespace Amplifier
                 await ValidateJWTToken();
                 await CreateLogEntryAsync(LogSeverity.Info, "About to send " + relations.Count() + " customer product logistics.");
                 var watch = System.Diagnostics.Stopwatch.StartNew();
-                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "customer-logistic-minimum-import",
-                    new StringContent(JsonConvert.SerializeObject(relations), Encoding.UTF8, "application/json"));
+                var response = new HttpResponseMessage();
+                if (relations.Count < 1000000)
+                {
+                    response = await _client.PostAsync(_wsConfig.B2BWSUrl + "customer-logistic-minimum-import",
+                        new StringContent(JsonConvert.SerializeObject(relations), Encoding.UTF8, "application/json"));
+                }
+                else
+                {
+                    StringBuilder sb = new StringBuilder();
+                    StringWriter sw = new StringWriter(sb);
+
+                    using (JsonWriter writer = new JsonTextWriter(sw))
+                    {
+                        var serializer = new JsonSerializer();
+                        serializer.Serialize(writer, relations);
+
+                        response = await _client.PostAsync(_wsConfig.B2BWSUrl + "customer-logistic-minimum-import",
+                             new StringContent(sw.ToString(), Encoding.UTF8, "application/json"));
+                    }
+                }
                 if (!response.IsSuccessStatusCode)
                 {
                     watch.Stop();
