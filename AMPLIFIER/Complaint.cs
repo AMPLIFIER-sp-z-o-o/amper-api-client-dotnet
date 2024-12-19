@@ -22,7 +22,7 @@ namespace Amplifier
         public List<ComplaintLine> lines { get; set; }
         public List<object> attachments { get; set; }
         public List<object> notes { get; set; }
-        public string nr { get; set; }
+        public string number { get; set; }
         public string note { get; set; }
         public string status { get; set; }
         public DateTime created_at { get; set; }
