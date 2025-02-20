@@ -41,6 +41,7 @@ namespace Amplifier
         public string sales_rep_phone { get; set; }
         public object document_metadata { get; set; }
         public CoordsDetails coords_details { get; set; }
+        public DeliveryAddress delivery_address { get; set; }
     }
 
     public class DocumentLine
@@ -165,5 +166,21 @@ namespace Amplifier
         public int? relation_id { get; set; }
         public int? condition_id { get; set; }
         public int? price_level_id { get; set; }
+    }
+
+    public class DeliveryAddress
+    {
+        public string external_id { get; set; }
+        public int id { get; set; }
+        public object deleted { get; set; }
+        public string name { get; set; }
+        public string city { get; set; }
+        public string postal_code { get; set; }
+        public string street { get; set; }
+        public object street_continuation { get; set; }
+        public string email { get; set; }
+        public object phone { get; set; }
+        public string voivodeship { get; set; }
+        public int customer { get; set; }
     }
 }
