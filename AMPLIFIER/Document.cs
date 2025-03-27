@@ -42,6 +42,7 @@ namespace Amplifier
         public object document_metadata { get; set; }
         public CoordsDetails coords_details { get; set; }
         public DeliveryAddress delivery_address { get; set; }
+        public string sales_rep_phone { get; set; }
     }
 
     public class DocumentLine
