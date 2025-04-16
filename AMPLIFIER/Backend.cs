@@ -343,6 +343,36 @@ namespace Amplifier
             }
         }
 
+        public async System.Threading.Tasks.Task SendProductSetsAsync(List<ProductSets> product_sets)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                await CreateLogEntryAsync(LogSeverity.Info, "About to send " + product_sets.Count() + " product sets.");
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "product-sets-import",
+                    new StringContent(JsonConvert.SerializeObject(product_sets), Encoding.UTF8,
+                        "application/json"));
+                if (!response.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Error,
+                        "FAILURE while sending product sets after " + watch.ElapsedMilliseconds + " ms; "
+                        + await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Info,
+                        "Success while sending product sets after " + watch.ElapsedMilliseconds + " ms.");
+                }
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
+            }
+        }
+
         public async System.Threading.Tasks.Task SendAccountsAsync(List<Account> accounts)
         {
             try

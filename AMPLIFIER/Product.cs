@@ -185,7 +185,6 @@ namespace Amplifier
         public decimal purchase_price { get; set; }
     }
 
-
     public class RelatedProducts
     {
         public string external_id { get; set; }
@@ -196,7 +195,18 @@ namespace Amplifier
     {
         public string external_id { get; set; }
     }
-    
+
+    public class ProductSets
+    {
+        public string external_id { get; set; }
+        public List<ProductSet> product_sets { get; set; }
+    }
+
+    public class ProductSet
+    {
+        public string external_id { get; set; }
+    }
+
     public class UnitOfMeasure
     {
         public string product_external_id { get; set; }
