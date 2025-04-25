@@ -24,7 +24,7 @@ You can add this package to your project by using:
 
   ```xml
   <ItemGroup>
-      <PackageReference Include="AmperApiClient.NET" Version="1.1.134" />
+      <PackageReference Include="AmperApiClient.NET" Version="1.1.136" />
   </ItemGroup>
   ```
 

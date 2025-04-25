@@ -710,15 +710,15 @@ namespace Amplifier
             }
         }
 
-        public async System.Threading.Tasks.Task<List<Complaint>> GetListOfComplaints()
+        public async System.Threading.Tasks.Task<List<Complaint>> GetListOfComplaints(string status = "NEW")
         {
             try
             {
                 await ValidateJWTToken();
                 await CreateLogEntryAsync(LogSeverity.Info, "About to get list of complaints.");
+                string uri = String.Format(_wsConfig.B2BWSUrl.Replace("api/", "") + "complaints-translator/?status={0}", status);
                 var watch = System.Diagnostics.Stopwatch.StartNew();
-                HttpResponseMessage response =
-                    await _client.GetAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "complaints-translator/?status=NEW");
+                HttpResponseMessage response = await _client.GetAsync(uri);
                 response.EnsureSuccessStatusCode();
                 if (!response.IsSuccessStatusCode)
                 {
