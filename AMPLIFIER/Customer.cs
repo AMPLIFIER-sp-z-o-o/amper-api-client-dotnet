@@ -73,7 +73,7 @@ namespace Amplifier
         public decimal? weight_restrictions { get; set; }
         public decimal? weight_restrictions_limit { get; set; }
         public decimal? free_shipping_from { get; set; }
-        public string delivery_schedule = "";
+        public string delivery_schedule { get; set; }
     }
 
     public class CustomerProductLogisticMinimum
