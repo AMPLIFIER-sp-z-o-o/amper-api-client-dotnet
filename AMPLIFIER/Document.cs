@@ -90,6 +90,7 @@ namespace Amplifier
         public int? budget { get; set; }
         public int? source_target_goal { get; set; }
         public bool? export_rewards_to_a_separate_doc { get; set; }
+        public string stock_fulfillment_options { get; set; }
     }
 
     public class DocumentType
