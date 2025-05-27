@@ -681,7 +681,7 @@ namespace Amplifier
             }
         }
 
-        public async System.Threading.Tasks.Task<List<Order>> GetRelatedOrders(string document_id)
+        public async System.Threading.Tasks.Task<List<RelatedOrder>> GetRelatedOrders(string document_id)
         {
             try
             {
@@ -704,13 +704,13 @@ namespace Amplifier
                     await CreateLogEntryAsync(LogSeverity.Info,
                         "Success while getting list of orders after " + watch.ElapsedMilliseconds + " ms.");
                 }
-                List<Order> orders = JsonConvert.DeserializeObject<List<Order>>(await response.Content.ReadAsStringAsync());
+                List<RelatedOrder> orders = JsonConvert.DeserializeObject<List<RelatedOrder>>(await response.Content.ReadAsStringAsync());
                 return orders;
             }
             catch (Exception e)
             {
                 await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
-                return new List<Order>();
+                return new List<RelatedOrder>();
             }
         }
 
