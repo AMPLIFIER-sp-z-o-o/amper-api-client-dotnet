@@ -681,6 +681,39 @@ namespace Amplifier
             }
         }
 
+        public async System.Threading.Tasks.Task<List<Order>> GetRelatedOrders(string document_id)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                await CreateLogEntryAsync(LogSeverity.Info, "About to get list of orders related to document " + document_id);
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                string uri = String.Format(_wsConfig.B2BWSUrl.Replace("api/", "") + "documents/{0}/related-orders/", document_id);
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                response.EnsureSuccessStatusCode();
+                if (!response.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Error,
+                        "FAILURE while getting list of orders after " + watch.ElapsedMilliseconds + " ms; "
+                        + await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Info,
+                        "Success while getting list of orders after " + watch.ElapsedMilliseconds + " ms.");
+                }
+                List<Order> orders = JsonConvert.DeserializeObject<List<Order>>(await response.Content.ReadAsStringAsync());
+                return orders;
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
+                return new List<Order>();
+            }
+        }
+
         public async System.Threading.Tasks.Task SendAddresses(List<Address> addresses)
         {
             try
