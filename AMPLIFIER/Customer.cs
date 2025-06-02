@@ -62,6 +62,7 @@ namespace Amplifier
         public DateTime? concession_b_valid_until { get; set; }
         public DateTime? concession_c_valid_until { get; set; }
         public string default_sales_rep_identifier = "";
+        public SalesRepresentative? default_sales_rep { get; set; }
         public bool check_minimal_price { get; set; }
         public bool is_locked_for_sale { get; set; }
         public string ean { get; set; }
