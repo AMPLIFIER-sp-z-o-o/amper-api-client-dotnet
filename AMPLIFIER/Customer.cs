@@ -205,6 +205,7 @@ namespace Amplifier
         public DateTime added_at { get; set; }
         public string created_by { get; set; }
         public string customer_external_id { get; set; }
+        public int? note_type_id { get; set; }
     }
 
     public class CustomerNoteType
