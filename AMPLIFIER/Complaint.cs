@@ -32,5 +32,6 @@ namespace Amplifier
         public string customer_external_id { get; set; }
         public Customer? customer { get; set; }
         public object correction_type { get; set; }
+        public string sales_rep_username { get; set; }
     }
 }
