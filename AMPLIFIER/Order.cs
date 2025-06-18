@@ -22,6 +22,7 @@ namespace Amplifier
         public string external_id { get; set; }
         public string product_name { get; set; }
         public string product_sku { get; set; }
+        public string product_ean { get; set; }
         public decimal quantity { get; set; }
         public string base_price_net { get; set; }
         public string discount { get; set; }
