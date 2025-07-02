@@ -53,8 +53,8 @@ namespace Amplifier
         public string product_symbol { get; set; }
         public string product_ean { get; set; }
         public string product_short_code { get; set; }
-        public decimal product_additional_fees_net { get; set; }
-        public decimal product_additional_fees_gross { get; set; }
+        public decimal? product_additional_fees_net { get; set; }
+        public decimal? product_additional_fees_gross { get; set; }
         public string product_name { get; set; }
         public int vat { get; set; }
         public string unit { get; set; }
