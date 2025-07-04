@@ -186,4 +186,11 @@ namespace Amplifier
         public string voivodeship { get; set; }
         public int customer { get; set; }
     }
+
+    public class DocumentBasics
+    {
+        public string external_id { get; set; }
+        public int? id { get; set; }
+        public string number { get; set; }
+    }
 }

@@ -1056,6 +1056,39 @@ namespace Amplifier
             }
         }
 
+        public async System.Threading.Tasks.Task<DocumentBasics> GetDocumentBasics(string id)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                await CreateLogEntryAsync(LogSeverity.Info, "About to get a document.");
+                string uri = String.Format(_wsConfig.B2BWSUrl.Replace("api/", "") + "documents-translator/{0}/", id);
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                response.EnsureSuccessStatusCode();
+                if (!response.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Error,
+                        "FAILURE while getting a document after " + watch.ElapsedMilliseconds + " ms; "
+                        + await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Info,
+                        "Success while getting a document after " + watch.ElapsedMilliseconds + " ms.");
+                }
+                DocumentBasics document = JsonConvert.DeserializeObject<DocumentBasics>(await response.Content.ReadAsStringAsync());
+                return document;
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
+                return null;
+            }
+        }
+
         public async System.Threading.Tasks.Task<string> ChangeDocumentStatus(string status, string id)
         {
             try
