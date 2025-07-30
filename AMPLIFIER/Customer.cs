@@ -181,6 +181,7 @@ namespace Amplifier
         public SalesRepresetnative default_sales_rep { get; set; }
         public object default_stock_location { get; set; }
         public Address default_address { get; set; }
+        public bool has_documents { get; set; }
     }
     public class SalesRepresetnative
     {
