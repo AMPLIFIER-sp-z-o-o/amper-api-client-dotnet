@@ -94,10 +94,11 @@ namespace Amplifier
             try
             {
                 await ValidateJWTToken();
-                await CreateLogEntryAsync(LogSeverity.Info, "About to send " + priceLevels.Count() + " prices.");
                 var watch = System.Diagnostics.Stopwatch.StartNew();
+                string content = JsonConvert.SerializeObject(priceLevels);
+                await CreateLogEntryAsync(LogSeverity.Info, "About to send " + priceLevels.Count() + " prices. Size: " + content.Length);
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "prices-import",
-                    new StringContent(JsonConvert.SerializeObject(priceLevels), Encoding.UTF8, "application/json"));
+                    new StringContent(content, Encoding.UTF8, "application/json"));
                 if (!response.IsSuccessStatusCode)
                 {
                     watch.Stop();
