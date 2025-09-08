@@ -48,6 +48,7 @@ namespace Amplifier
         public string email { get; set; }
         public object phone { get; set; }
         public string voivodeship { get; set; }
+        public string company_name { get; set; }
         public int customer { get; set; }
     }
 
