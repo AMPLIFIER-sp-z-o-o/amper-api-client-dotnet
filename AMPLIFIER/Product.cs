@@ -183,6 +183,7 @@ namespace Amplifier
         public string cn_code { get; set; }
         public int order { get; set; }
         public decimal purchase_price { get; set; }
+        public decimal rsp_price { get; set; }
     }
 
     public class RelatedProducts
