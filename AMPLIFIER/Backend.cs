@@ -403,8 +403,9 @@ namespace Amplifier
             }
         }
 
-        public async System.Threading.Tasks.Task SendDocumentsAsync(List<Document> documents)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> SendDocumentsAsync(List<Document> documents)
         {
+            HttpResponseMessage? response = null;
             try
             {
                 await ValidateJWTToken();
@@ -414,7 +415,7 @@ namespace Amplifier
                 int errors = 0;
                 foreach (List<Document> p in toSend)
                 {
-                    var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "document-import",
+                    response = await _client.PostAsync(_wsConfig.B2BWSUrl + "document-import",
                         new StringContent(JsonConvert.SerializeObject(p), Encoding.UTF8, "application/json"));
                     if (!response.IsSuccessStatusCode)
                     {
@@ -432,6 +433,7 @@ namespace Amplifier
             {
                 await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
+            return response;
         }
 
         public async System.Threading.Tasks.Task SendAlignDocumentAsync(Document document)
