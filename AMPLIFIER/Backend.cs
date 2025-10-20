@@ -1908,5 +1908,34 @@ namespace Amplifier
                 return new List<CustomerNote>();
             }
         }
+        
+        public async System.Threading.Tasks.Task SendTrendsAsync(List<Trends> trends)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                await CreateLogEntryAsync(LogSeverity.Info, "About to send " + trends.Count() + " trends.");
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "trends-import",
+                    new StringContent(JsonConvert.SerializeObject(trends), Encoding.UTF8, "application/json"));
+                if (!response.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Error,
+                        "FAILURE while sending trends after " + watch.ElapsedMilliseconds + " ms; "
+                        + await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Info,
+                        "Success while sending trends after " + watch.ElapsedMilliseconds + " ms.");
+                }
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
+            }
+        }        
     }
 }
