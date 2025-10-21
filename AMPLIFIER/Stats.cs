@@ -1,6 +1,6 @@
 namespace Amplifier
 {
-    public class Trends
+    public class Trend
     {
         public string customer { get; set; }
         public string reporting_period { get; set; } = "year";

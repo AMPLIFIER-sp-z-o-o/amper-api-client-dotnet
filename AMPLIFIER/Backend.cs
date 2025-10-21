@@ -1909,7 +1909,7 @@ namespace Amplifier
             }
         }
         
-        public async System.Threading.Tasks.Task SendTrendsAsync(List<Trends> trends)
+        public async System.Threading.Tasks.Task SendTrendsAsync(List<Trend> trends)
         {
             try
             {
