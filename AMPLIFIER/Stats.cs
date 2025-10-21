@@ -2,6 +2,7 @@ namespace Amplifier
 {
     public class Trend
     {
+        public string external_id { get; set; }
         public string customer { get; set; }
         public string reporting_period { get; set; } = "year";
         public int year { get; set; } = 0;
