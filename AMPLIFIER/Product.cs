@@ -184,6 +184,9 @@ namespace Amplifier
         public int order { get; set; }
         public decimal purchase_price { get; set; }
         public decimal rsp_price { get; set; }
+        public decimal deposit_pack_multiplier { get; set; }
+        public decimal deposit_pack_price { get; set; }
+        public string deposit_pack_type { get; set; }
     }
 
     public class RelatedProducts
