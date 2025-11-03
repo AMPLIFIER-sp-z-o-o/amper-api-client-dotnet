@@ -76,6 +76,7 @@ namespace Amplifier
         public decimal? free_shipping_from { get; set; }
         public string delivery_schedule { get; set; }
         public object customer_metadata { get; set; }
+        public bool for_employees { get; set; }
     }
 
     public class CustomerProductLogisticMinimum
