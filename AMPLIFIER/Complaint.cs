@@ -13,7 +13,8 @@ namespace Amplifier
         public string order { get; set; }
         public string description { get; set; }
         public int complaint { get; set; }
-        public string product_external_id { get; set; }        
+        public string product_external_id { get; set; }
+        public decimal quantity { get; set; }
     }
 
     public class Complaint
