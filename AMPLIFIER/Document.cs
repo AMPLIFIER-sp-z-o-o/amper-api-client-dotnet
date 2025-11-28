@@ -186,4 +186,18 @@ namespace Amplifier
         public string voivodeship { get; set; }
         public int customer { get; set; }
     }
+
+    public class DocumentDownloadRequest
+    {
+        public int status { get; set; }
+        public string keycloak_id { get; set; }
+        public string user_name { get; set; }
+        public string user_first_name { get; set; }
+        public string user_last_name { get; set; }
+        public string user_email { get; set; }
+        public int document_id { get; set; }
+        public string document_external_id { get; set; }
+        public DateTime created_at { get; set; }
+        public DateTime sent_at { get; set; }
+    }
 }

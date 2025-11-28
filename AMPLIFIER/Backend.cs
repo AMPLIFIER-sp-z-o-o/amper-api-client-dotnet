@@ -1936,6 +1936,74 @@ namespace Amplifier
             {
                 await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
-        }        
+        }
+
+        public async System.Threading.Tasks.Task<List<DocumentDownloadRequest>> GetListOfDocumentDownloadRequests()
+        {
+            try
+            {
+                await ValidateJWTToken();
+                await CreateLogEntryAsync(LogSeverity.Info, "About to get a list of document download requests.");
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                HttpResponseMessage response =
+                    await _client.GetAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "document-download-requests/");
+                response.EnsureSuccessStatusCode();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Error,
+                        "FAILURE while getting list of document download requests after " + watch.ElapsedMilliseconds + " ms; "
+                        + await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Info,
+                        "Success while getting list of document download requests after " + watch.ElapsedMilliseconds + " ms.");
+                }
+
+                List<DocumentDownloadRequest> requests = JsonConvert.DeserializeObject<List<DocumentDownloadRequest>>(await response.Content.ReadAsStringAsync());
+                return requests;
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
+                return new List<DocumentDownloadRequest>();
+            }
+        }
+
+        public async System.Threading.Tasks.Task<Exception?> SendDocumentDownload(int download_request_id, string path, string fileName)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                await CreateLogEntryAsync(LogSeverity.Info, "About to send file for download " + fileName);
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                var fileBytes = File.ReadAllBytes(path);
+                var byteArrayContent = new ByteArrayContent(fileBytes);
+                var multipartContent = new MultipartFormDataContent();
+                multipartContent.Add(byteArrayContent, "FILES", fileName);
+                multipartContent.Add(new StringContent("download_request_id"), download_request_id.ToString());
+
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "document-download-request-send-file/",
+                    multipartContent);
+                if (!response.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Error,
+                        "FAILURE while sending document for download after " + watch.ElapsedMilliseconds + " ms; "
+                        + await response.Content.ReadAsStringAsync());
+                    return new Exception(await response.Content.ReadAsStringAsync());
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, ex.Message, ex);
+                return ex;
+            }
+        }
     }
 }
