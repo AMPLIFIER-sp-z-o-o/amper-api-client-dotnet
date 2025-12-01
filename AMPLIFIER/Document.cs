@@ -195,9 +195,9 @@ namespace Amplifier
         public string user_first_name { get; set; }
         public string user_last_name { get; set; }
         public string user_email { get; set; }
-        public int document_id { get; set; }
+        public int document { get; set; }
         public string document_external_id { get; set; }
         public DateTime created_at { get; set; }
-        public DateTime sent_at { get; set; }
+        public DateTime? sent_at { get; set; }
     }
 }
