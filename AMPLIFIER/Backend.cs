@@ -1943,24 +1943,17 @@ namespace Amplifier
             try
             {
                 await ValidateJWTToken();
-                await CreateLogEntryAsync(LogSeverity.Info, "About to get a list of document download requests.");
                 var watch = System.Diagnostics.Stopwatch.StartNew();
                 HttpResponseMessage response =
                     await _client.GetAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "document-download-requests/");
                 response.EnsureSuccessStatusCode();
+                watch.Stop();
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    watch.Stop();
                     await CreateLogEntryAsync(LogSeverity.Error,
                         "FAILURE while getting list of document download requests after " + watch.ElapsedMilliseconds + " ms; "
                         + await response.Content.ReadAsStringAsync());
-                }
-                else
-                {
-                    watch.Stop();
-                    await CreateLogEntryAsync(LogSeverity.Info,
-                        "Success while getting list of document download requests after " + watch.ElapsedMilliseconds + " ms.");
                 }
 
                 List<DocumentDownloadRequest> requests = JsonConvert.DeserializeObject<List<DocumentDownloadRequest>>(await response.Content.ReadAsStringAsync());
