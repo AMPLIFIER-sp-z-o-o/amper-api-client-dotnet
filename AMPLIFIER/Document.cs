@@ -189,6 +189,7 @@ namespace Amplifier
 
     public class DocumentDownloadRequest
     {
+        public int id { get; set; }
         public int status { get; set; }
         public string keycloak_id { get; set; }
         public string user_name { get; set; }
