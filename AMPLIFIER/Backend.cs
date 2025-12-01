@@ -1986,7 +1986,7 @@ namespace Amplifier
                 multipartContent.Add(byteArrayContent, "pdf_file", fileName);
                 multipartContent.Add(new StringContent("download_request_id"), download_request_id.ToString());
 
-                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "document-download-request-send-file/",
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "document-download-request-send-file",
                     multipartContent);
                 if (!response.IsSuccessStatusCode)
                 {
