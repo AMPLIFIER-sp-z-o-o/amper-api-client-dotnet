@@ -15,6 +15,7 @@ namespace Amplifier
         public int complaint { get; set; }
         public string product_external_id { get; set; }
         public decimal quantity { get; set; }
+        public object complaint_reason { get; set; }
     }
 
     public class Complaint
