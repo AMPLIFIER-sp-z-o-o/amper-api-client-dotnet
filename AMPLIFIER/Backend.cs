@@ -1118,6 +1118,8 @@ namespace Amplifier
             }
         }
         private static readonly NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
+        public event EventHandler OnBackendLogEntry;
+
         public async System.Threading.Tasks.Task CreateLogEntryAsync(string level, string message)
         {
             try
@@ -1142,6 +1144,8 @@ namespace Amplifier
                         log.Error(message);
                         break;
                 }
+
+                OnBackendLogEntry?.Invoke(this, new BackendLogEntryEventArgs<BackendLog>(new BackendLog(level, message)));
             }
             catch (Exception e)
             {
@@ -1184,6 +1188,8 @@ namespace Amplifier
                         log.Error(ex, message);
                         break;
                 }
+
+                OnBackendLogEntry?.Invoke(this, new BackendLogEntryEventArgs<BackendLog>(new BackendLog(level, message, ex)));
             }
             catch (Exception e)
             {
