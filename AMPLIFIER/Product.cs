@@ -188,6 +188,8 @@ namespace Amplifier
         public decimal deposit_pack_price { get; set; }
         public string deposit_pack_type { get; set; }
         public string expiration_date { get; set; }
+        public decimal additional_fees_net { get; set; }
+        public decimal additional_fees_gross { get; set; }
     }
 
     public class RelatedProducts
