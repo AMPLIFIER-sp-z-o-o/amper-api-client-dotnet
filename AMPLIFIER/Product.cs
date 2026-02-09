@@ -66,6 +66,13 @@ namespace Amplifier
         public decimal quantity_allocated { get; set; }
     }
 
+    public class StockLocationDocument
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+    }
+    
+    
     public class StockLocation
     {
         public string name { get; set; }
