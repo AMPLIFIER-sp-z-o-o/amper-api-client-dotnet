@@ -13,7 +13,7 @@ namespace Amplifier
         public DocumentProvider? document_provider { get; set; }
         public Visit visit { get; set; }
         public DocumentType document_type { get; set; }
-        public object stock_location { get; set; }
+        public StockLocation stock_location { get; set; }
         public string number { get; set; }
         public string status { get; set; }
         public DateTime date { get; set; }
