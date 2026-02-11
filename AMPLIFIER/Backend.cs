@@ -1117,7 +1117,6 @@ namespace Amplifier
                 await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
-        private static readonly NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         public event EventHandler OnBackendLogEntry;
 
         public async System.Threading.Tasks.Task CreateLogEntryAsync(string level, string message)
@@ -1125,26 +1124,6 @@ namespace Amplifier
             try
             {
                 await ValidateJWTToken();
-
-                switch (level)
-                {
-                    case "info":
-                        log.Info(message);
-                        break;
-                    case "warning":
-                        log.Warn(message);
-                        break;
-                    case "debug":
-                        log.Debug(message);
-                        break;
-                    case "error":
-                        log.Error(message);
-                        break;
-                    default:
-                        log.Error(message);
-                        break;
-                }
-
                 OnBackendLogEntry?.Invoke(this, new BackendLogEntryEventArgs<BackendLog>(new BackendLog(level, message)));
             }
             catch (Exception e)
@@ -1157,38 +1136,6 @@ namespace Amplifier
             try
             {
                 await ValidateJWTToken();
-
-                if (ex.HResult == -2146233088 && ex.Message == "Wystąpił błąd podczas wysyłania żądania.")
-                {
-                    level = LogSeverity.Info;
-                    message = "[i] " + message;
-                }
-
-                if (ex.HResult == -2147467259 && ex.Message.StartsWith("Nieznany host."))
-                {
-                    level = LogSeverity.Info;
-                    message = "[i] " + message;
-                }
-
-                switch (level)
-                {
-                    case "info":
-                        log.Info(ex, message);
-                        break;
-                    case "warning":
-                        log.Warn(ex, message);
-                        break;
-                    case "debug":
-                        log.Debug(ex, message);
-                        break;
-                    case "error":
-                        log.Error(ex, message);
-                        break;
-                    default:
-                        log.Error(ex, message);
-                        break;
-                }
-
                 OnBackendLogEntry?.Invoke(this, new BackendLogEntryEventArgs<BackendLog>(new BackendLog(level, message, ex)));
             }
             catch (Exception e)
