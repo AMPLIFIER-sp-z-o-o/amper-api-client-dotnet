@@ -1,4 +1,4 @@
-# [AmperApiClient.NET](https://www.nuget.org/packages/AmperApiClient.NET/)
+﻿# [AmperApiClient.NET](https://www.nuget.org/packages/AmperApiClient.NET/)
 
 Nuget Package for communicating with Amplifier API.
 
@@ -24,7 +24,7 @@ You can add this package to your project by using:
 
   ```xml
   <ItemGroup>
-      <PackageReference Include="AmperApiClient.NET" Version="1.1.180" />
+      <PackageReference Include="AmperApiClient.NET" Version="1.1.181" />
   </ItemGroup>
   ```
 

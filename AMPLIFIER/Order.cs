@@ -65,6 +65,7 @@ namespace Amplifier
         public Customer customer { get; set; }
         public DateTime created { get; set; }
         public DateTime updated { get; set; }
+        public DateTime? delivery_date { get; set; }
         public string status { get; set; }
         public string user_email { get; set; }
         public string shipping_price_net { get; set; }
