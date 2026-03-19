@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -1949,6 +1949,35 @@ namespace Amplifier
             {
                 await CreateLogEntryAsync(LogSeverity.Error, ex.Message, ex);
                 return ex;
+            }
+        }
+
+        public async System.Threading.Tasks.Task SendProductNameTranslationsAsync(List<ProductNameTranslation> productNameTranslations)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                await CreateLogEntryAsync(LogSeverity.Info, "About to send " + productNameTranslations.Count() + " product name translations.");
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "product-name-translations-import",
+                    new StringContent(JsonConvert.SerializeObject(productNameTranslations), Encoding.UTF8, "application/json"));
+                if (!response.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Error,
+                        "FAILURE while sending product name translations after " + watch.ElapsedMilliseconds + " ms; "
+                        + await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Info,
+                        "Success while sending product name translations after " + watch.ElapsedMilliseconds + " ms.");
+                }
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
     }
