@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Amplifier
@@ -269,5 +269,12 @@ namespace Amplifier
         public bool is_featured { get; set; }
         public string short_code { get; set; }
         public string updatable_fields { get; set; }
+    }
+
+    public class ProductNameTranslation
+    {
+        public string product_external_id { get; set; }
+        public string language_code { get; set; }
+        public string translated_name { get; set; }
     }
 }
