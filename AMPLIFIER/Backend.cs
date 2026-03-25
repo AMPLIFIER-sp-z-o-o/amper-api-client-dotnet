@@ -59,14 +59,15 @@ namespace Amplifier
             }
         }
 
-        public async System.Threading.Tasks.Task SendPriceLevelsAsync(List<PriceLevel> priceLevels)
+        public async System.Threading.Tasks.Task SendPriceLevelsAsync(List<PriceLevel> priceLevels, bool isIncremental = false)
         {
             try
             {
                 await ValidateJWTToken();
                 await CreateLogEntryAsync(LogSeverity.Info, "About to send " + priceLevels.Count() + " price levels.");
                 var watch = System.Diagnostics.Stopwatch.StartNew();
-                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "price-levels-import",
+                string incrementalQuery = isIncremental ? "?incremental=1" : "";
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "price-levels-import" + isIncremental,
                     new StringContent(JsonConvert.SerializeObject(priceLevels), Encoding.UTF8, "application/json"));
 
                 if (!response.IsSuccessStatusCode)
@@ -89,15 +90,16 @@ namespace Amplifier
             }
         }
 
-        public async System.Threading.Tasks.Task SendPricesAsync(List<Price> priceLevels)
+        public async System.Threading.Tasks.Task SendPricesAsync(List<Price> priceLevels, bool isIncremental = false)
         {
             try
             {
                 await ValidateJWTToken();
                 var watch = System.Diagnostics.Stopwatch.StartNew();
+                string incrementalQuery = isIncremental ? "?incremental=1" : "";
                 string content = JsonConvert.SerializeObject(priceLevels);
                 await CreateLogEntryAsync(LogSeverity.Info, "About to send " + priceLevels.Count() + " prices. Size: " + content.Length);
-                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "prices-import",
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "prices-import" + isIncremental,
                     new StringContent(content, Encoding.UTF8, "application/json"));
                 if (!response.IsSuccessStatusCode)
                 {
@@ -237,14 +239,15 @@ namespace Amplifier
         }
 
         public async System.Threading.Tasks.Task SendCustomerProductsRelationAsyncsAsync(
-            List<CustomerProductRelation> relations)
+            List<CustomerProductRelation> relations, bool isIncremental = false)
         {
             try
             {
                 await ValidateJWTToken();
                 await CreateLogEntryAsync(LogSeverity.Info, "About to send " + relations.Count() + " customer products relations.");
                 var watch = System.Diagnostics.Stopwatch.StartNew();
-                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "customer-products-import",
+                string incrementalQuery = isIncremental ? "?incremental=1" : "";
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "customer-products-import" + incrementalQuery,
                     new StringContent(JsonConvert.SerializeObject(relations), Encoding.UTF8, "application/json"));
                 if (!response.IsSuccessStatusCode)
                 {
@@ -267,17 +270,18 @@ namespace Amplifier
         }
 
         public async System.Threading.Tasks.Task SendCustomerProductLogisticMinimumAsync(
-            List<CustomerProductLogisticMinimum> relations)
+            List<CustomerProductLogisticMinimum> relations, bool isIncremental = false)
         {
             try
             {
                 await ValidateJWTToken();
                 await CreateLogEntryAsync(LogSeverity.Info, "About to send " + relations.Count() + " customer product logistics.");
                 var watch = System.Diagnostics.Stopwatch.StartNew();
+                string incrementalQuery = isIncremental ? "?incremental=1" : "";
                 var response = new HttpResponseMessage();
                 if (relations.Count < 1000000)
                 {
-                    response = await _client.PostAsync(_wsConfig.B2BWSUrl + "customer-logistic-minimum-import",
+                    response = await _client.PostAsync(_wsConfig.B2BWSUrl + "customer-logistic-minimum-import" + isIncremental,
                         new StringContent(JsonConvert.SerializeObject(relations), Encoding.UTF8, "application/json"));
                 }
                 else
@@ -374,14 +378,15 @@ namespace Amplifier
             }
         }
 
-        public async System.Threading.Tasks.Task SendAccountsAsync(List<Account> accounts)
+        public async System.Threading.Tasks.Task SendAccountsAsync(List<Account> accounts, bool isIncremental = false)
         {
             try
             {
                 await ValidateJWTToken();
                 await CreateLogEntryAsync(LogSeverity.Info, "About to send " + accounts.Count() + " accounts.");
                 var watch = System.Diagnostics.Stopwatch.StartNew();
-                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "accounts-import",
+                string incrementalQuery = isIncremental ? "?incremental=1" : "";
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "accounts-import" + incrementalQuery,
                     new StringContent(JsonConvert.SerializeObject(accounts), Encoding.UTF8, "application/json"));
                 if (!response.IsSuccessStatusCode)
                 {
@@ -494,7 +499,7 @@ namespace Amplifier
             }
         }
 
-        public async System.Threading.Tasks.Task SendCategoryDiscountAsync(List<CategoryDiscount> category_discounts)
+        public async System.Threading.Tasks.Task SendCategoryDiscountAsync(List<CategoryDiscount> category_discounts, bool isIncremental = false)
         {
             try
             {
@@ -506,6 +511,7 @@ namespace Amplifier
                 string single_thread = "1";
                 var watch = System.Diagnostics.Stopwatch.StartNew();
                 int errors = 0;
+                string incrementalQuery = isIncremental ? "&incremental=1" : "";
                 foreach (List<CategoryDiscount> p in toSend)
                 {
                     if (p.Count() < 50000)
@@ -516,7 +522,7 @@ namespace Amplifier
 
                     var response = await _client.PostAsync(
                         _wsConfig.B2BWSUrl + "category-discount-import?single_thread=1&first_package=" + first_package +
-                        "&last_package=" + last_package + "&single_thread=" + single_thread,
+                        "&last_package=" + last_package + "&single_thread=" + single_thread + incrementalQuery,
                         new StringContent(JsonConvert.SerializeObject(p), Encoding.UTF8, "application/json"));
                     first_package = "0";
                     if (!response.IsSuccessStatusCode)
@@ -717,14 +723,15 @@ namespace Amplifier
             }
         }
 
-        public async System.Threading.Tasks.Task SendAddresses(List<Address> addresses)
+        public async System.Threading.Tasks.Task SendAddresses(List<Address> addresses, bool isIncremental = false)
         {
             try
             {
                 await ValidateJWTToken();
                 await CreateLogEntryAsync(LogSeverity.Info, "About to send " + addresses.Count() + " addresses.");
                 var watch = System.Diagnostics.Stopwatch.StartNew();
-                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "addresses-import",
+                string incrementalQuery = isIncremental ? "?incremental=1" : "";
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "addresses-import" + incrementalQuery,
                     new StringContent(JsonConvert.SerializeObject(addresses), Encoding.UTF8, "application/json"));
                 if (!response.IsSuccessStatusCode)
                 {
@@ -816,14 +823,15 @@ namespace Amplifier
 
         }
 
-        public async System.Threading.Tasks.Task SendCustomerCategoriesAsync(List<CustomerCategory> categories)
+        public async System.Threading.Tasks.Task SendCustomerCategoriesAsync(List<CustomerCategory> categories, bool isIncremental = false)
         {
             try
             {
                 await ValidateJWTToken();
                 await CreateLogEntryAsync(LogSeverity.Info, "About to send " + categories.Count() + " categories.");
                 var watch = System.Diagnostics.Stopwatch.StartNew();
-                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "customer-categories-import",
+                string incrementalQuery = isIncremental ? "?incremental=1" : "";
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "customer-categories-import" + incrementalQuery,
                     new StringContent(JsonConvert.SerializeObject(categories), Encoding.UTF8, "application/json"));
                 if (!response.IsSuccessStatusCode)
                 {
@@ -846,14 +854,15 @@ namespace Amplifier
         }
 
         public async System.Threading.Tasks.Task SendCustomerCategoriesRelationAsyncsAsync(
-            List<CustomerCategoryRelation> relations)
+            List<CustomerCategoryRelation> relations, bool isIncremental = false)
         {
             try
             {
                 await ValidateJWTToken();
                 await CreateLogEntryAsync(LogSeverity.Info, "About to send " + relations.Count() + " customer categories relations.");
                 var watch = System.Diagnostics.Stopwatch.StartNew();
-                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "customer-categories-relation-import",
+                string incrementalQuery = isIncremental ? "?incremental=1" : "";
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "customer-categories-relation-import" + incrementalQuery,
                     new StringContent(JsonConvert.SerializeObject(relations), Encoding.UTF8, "application/json"));
                 if (!response.IsSuccessStatusCode)
                 {
@@ -875,14 +884,15 @@ namespace Amplifier
             }
         }
         
-        public async System.Threading.Tasks.Task SendPriceLevelAssigmentAsync(List<PriceLevelAssigment> assigments)
+        public async System.Threading.Tasks.Task SendPriceLevelAssigmentAsync(List<PriceLevelAssigment> assigments, bool isIncremental = false)
         {
             try
             {
                 await ValidateJWTToken();
                 await CreateLogEntryAsync(LogSeverity.Info, "About to send " + assigments.Count() + " price level assignments.");
                 var watch = System.Diagnostics.Stopwatch.StartNew();
-                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "price-level-assigment-import",
+                string incrementalQuery = isIncremental ? "?incremental=1" : "";
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "price-level-assigment-import" + incrementalQuery,
                     new StringContent(JsonConvert.SerializeObject(assigments), Encoding.UTF8, "application/json"));
                 if (!response.IsSuccessStatusCode)
                 {
