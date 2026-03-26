@@ -470,14 +470,15 @@ namespace Amplifier
             }
         }
 
-        public async System.Threading.Tasks.Task SendSettlementsAsync(List<Settlement> settlements)
+        public async System.Threading.Tasks.Task SendSettlementsAsync(List<Settlement> settlements, bool isIncremental = false)
         {
             try
             {
                 await ValidateJWTToken();
                 await CreateLogEntryAsync(LogSeverity.Info, "About to send " + settlements.Count() + " settlements.");
                 var watch = System.Diagnostics.Stopwatch.StartNew();
-                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "settlement-import",
+                string incrementalQuery = isIncremental ? "&incremental=1" : "";
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "settlement-import" + incrementalQuery,
                     new StringContent(JsonConvert.SerializeObject(settlements), Encoding.UTF8, "application/json"));
                 if (!response.IsSuccessStatusCode)
                 {
@@ -1154,14 +1155,15 @@ namespace Amplifier
             }
         }
 
-        public async System.Threading.Tasks.Task SendDefaultPriceOverwriteForCategoryDiscountAsync(List<DefaultPriceOverwriteForCategoryDiscount> overwrites)
+        public async System.Threading.Tasks.Task SendDefaultPriceOverwriteForCategoryDiscountAsync(List<DefaultPriceOverwriteForCategoryDiscount> overwrites, bool isIncremental = false)
         {
             try
             {
                 await ValidateJWTToken();
                 await CreateLogEntryAsync(LogSeverity.Info, "About to send " + overwrites.Count() + " default price overwrites for category discounts.");
                 var watch = System.Diagnostics.Stopwatch.StartNew();
-                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "default-price-overwrite-import",
+                string incrementalQuery = isIncremental ? "?incremental=1" : "";
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "default-price-overwrite-import" + incrementalQuery,
                     new StringContent(JsonConvert.SerializeObject(overwrites), Encoding.UTF8, "application/json"));
                 if (!response.IsSuccessStatusCode)
                 {
