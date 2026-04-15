@@ -20,8 +20,8 @@ namespace Amplifier
         public string external_id { get; set; }
         public decimal price { get; set; }
         public decimal discount { get; set; }
-        public string start_date { get; set; }
-        public string end_date { get; set; }
+        public string start_date { get; set; } = "2000-01-01 00:00:00";
+        public string end_date { get; set; } = "2100-01-01 00:00:00";
         public int order { get; set; }
         public bool allow_override_minimal_price { get; set; }
     }
