@@ -477,7 +477,7 @@ namespace Amplifier
                 await ValidateJWTToken();
                 await CreateLogEntryAsync(LogSeverity.Info, "About to send " + settlements.Count() + " settlements.");
                 var watch = System.Diagnostics.Stopwatch.StartNew();
-                string incrementalQuery = isIncremental ? "&incremental=1" : "";
+                string incrementalQuery = isIncremental ? "?incremental=1" : "";
                 var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "settlement-import" + incrementalQuery,
                     new StringContent(JsonConvert.SerializeObject(settlements), Encoding.UTF8, "application/json"));
                 if (!response.IsSuccessStatusCode)
