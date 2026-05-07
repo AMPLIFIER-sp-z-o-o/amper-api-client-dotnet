@@ -30,6 +30,8 @@ namespace Amplifier
         public string unit_price_gross { get; set; }
         public string tax_rate { get; set; }
         public bool is_promotion_reward { get; set; }
+        public decimal? piggy_bank_budget { get; set; }
+        public decimal? piggy_bank_budget_built { get; set; }
         public int product { get; set; }
         public int? promotion_condition { get; set; }
         public Promotion? promotion { get; set; }
