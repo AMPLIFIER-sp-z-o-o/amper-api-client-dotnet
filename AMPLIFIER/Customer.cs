@@ -37,6 +37,7 @@ namespace Amplifier
         public string password { get; set; }
         public decimal trade_credit_limit { get; set; }
         public decimal overdue_limit { get; set; }
+        public decimal overdue_settlements_limit { get; set; }
         public decimal discount { get; set; }
         public string currency_code { get; set; }
         public int id { get; set; }
