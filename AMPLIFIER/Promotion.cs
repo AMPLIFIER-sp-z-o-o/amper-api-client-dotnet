@@ -64,6 +64,7 @@ namespace Amplifier
         public string promotion_condition_external_id { get; set; }
         public string product_external_id { get; set; }
         public string product_category_external_id { get; set; }
+        public string unitofmeasure_external_id { get; set; }
         public decimal value { get; set; }
         public string value_type { get; set; }
         public decimal value_max { get; set; }
