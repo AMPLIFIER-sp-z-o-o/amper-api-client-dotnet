@@ -25,6 +25,7 @@ namespace Amplifier
         public string external_id { get; set; }
         public string type { get; set; }
         public decimal goal_value { get; set; }
+        public decimal percentage_realization { get; set; }
         public string product_external_id { get; set; }
         public string product_category_external_id { get; set; }
 }
