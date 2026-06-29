@@ -84,6 +84,7 @@ namespace Amplifier
         public string order_type { get; set; }
         public string form_of_payment { get; set; }
         public object order_metadata { get; set; }
+        public string documentSource { get; set; }
     }
 
     public class RelatedOrder
