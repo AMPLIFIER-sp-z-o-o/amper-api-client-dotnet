@@ -78,7 +78,7 @@ namespace Amplifier
         public string delivery_schedule { get; set; }
         public object customer_metadata { get; set; }
         public bool for_employees { get; set; }
-        public AccountDetails? account_details { get; set; }
+        public Account? account_details { get; set; }
     }
 
     public class CustomerProductLogisticMinimum
@@ -221,18 +221,5 @@ namespace Amplifier
         public string type { get; set; }
         public string value { get; set; }
         public int order {  get; set; }
-    }
-
-    public class AccountDetails
-    {
-        public string city { get; set; }
-        public string email { get; set; }
-        public string name { get; set; }
-        public string postal_code { get; set; }
-        public string phone { get; set; }
-        public string short_name { get; set; }
-        public string street { get; set; }
-        public string voivodeship { get; set; }
-        public string tax_id { get; set; }
     }
 }
