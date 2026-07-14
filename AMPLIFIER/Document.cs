@@ -30,6 +30,8 @@ namespace Amplifier
         public DateTime? delivery_date { get; set; }
         public decimal percentage_discount { get; set; }
         public string username { get; set; }
+        public string shipping_price_net { get; set; }
+        public string shipping_price_gross { get; set; }
         public string document_provider_short_name { get; set; }
         public string document_type_name { get; set; }
         public string payment_form_external_id { get; set; }
