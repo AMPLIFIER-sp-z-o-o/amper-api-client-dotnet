@@ -43,7 +43,7 @@ namespace Amplifier
         public CoordsDetails coords_details { get; set; }
         public DeliveryAddress delivery_address { get; set; }
         public List<string> related_orders { get; set; }
-        public string shipment_type { get; set; }
+        public int? shipment_type { get; set; }
     }
 
     public class DocumentLine
