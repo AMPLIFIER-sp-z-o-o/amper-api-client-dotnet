@@ -46,6 +46,7 @@ namespace Amplifier
         public DeliveryAddress delivery_address { get; set; }
         public List<string> related_orders { get; set; }
         public int? shipment_type { get; set; }
+        public string ksef_number { get; set; }
     }
 
     public class DocumentLine
