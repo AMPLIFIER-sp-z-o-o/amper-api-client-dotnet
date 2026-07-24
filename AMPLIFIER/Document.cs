@@ -85,7 +85,7 @@ namespace Amplifier
         public string promotion_condition_relation { get; set; }
         public int? source_price_level { get; set; }        
         public string price_level_external_id { get; set; }     
-        public List<LineMetadata> line_metadata { get; set; }     
+        public LineMetadata line_metadata { get; set; }     
         public AppliedPromotion applied_promotion { get; set; }
         public bool is_promotion_reward { get; set; }
         public decimal? piggy_bank_budget { get; set; }
@@ -165,6 +165,12 @@ namespace Amplifier
 
     
     public class LineMetadata
+    {
+        public List<PricePath> price_path { get; set; }
+        public object additional_line_fields { get; set; }
+    }
+
+    public class PricePath
     {
         public int step { get; set; }
         public decimal? amount { get; set; }
