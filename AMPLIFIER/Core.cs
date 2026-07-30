@@ -10,7 +10,7 @@ namespace Amplifier
     {
         public string external_id { get; set; }
         public string value { get; set; }
-        public string order { get; set; }
+        public int order { get; set; }
         public string type { get; set; }
     }
 
