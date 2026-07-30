@@ -198,6 +198,7 @@ namespace Amplifier
         public object product_metadata { get; set; }
         public decimal additional_fees_net { get; set; }
         public decimal additional_fees_gross { get; set; }
+        public bool is_bundle { get; set; }
     }
 
     public class RelatedProducts
@@ -277,5 +278,14 @@ namespace Amplifier
         public string product_external_id { get; set; }
         public string language_code { get; set; }
         public string translated_name { get; set; }
+    }
+
+    public class ProductBundleItem
+    {
+        public string external_id { get; set; }
+        public string parent_item_external_id { get; set; }
+        public string child_item_external_id { get; set; }
+        public decimal quantity { get; set; }
+        public decimal price { get; set; }
     }
 }
