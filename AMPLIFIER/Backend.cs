@@ -2021,5 +2021,92 @@ namespace Amplifier
                 await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
+
+        public async System.Threading.Tasks.Task SendProductBundleItems(List<ProductBundleItem> bundleItems)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                await CreateLogEntryAsync(LogSeverity.Info, "About to send " + bundleItems.Count() + " bundle items.");
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "product-bundle-items-import",
+                    new StringContent(JsonConvert.SerializeObject(bundleItems), Encoding.UTF8, "application/json"));
+                if (!response.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Error,
+                        "FAILURE while sending product bundle items after " + watch.ElapsedMilliseconds + " ms; "
+                        + await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Info,
+                        "Success while sending product bundle items after " + watch.ElapsedMilliseconds + " ms.");
+                }
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
+            }
+        }
+
+        public async System.Threading.Tasks.Task SendCoreDictionaries(List<CoreDictionary> coreDictionaries)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                await CreateLogEntryAsync(LogSeverity.Info, "About to send " + coreDictionaries.Count() + " core dictionaries.");
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "dictionaries-import",
+                    new StringContent(JsonConvert.SerializeObject(coreDictionaries), Encoding.UTF8, "application/json"));
+                if (!response.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Error,
+                        "FAILURE while sending core dictionaries after " + watch.ElapsedMilliseconds + " ms; "
+                        + await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Info,
+                        "Success while sending core dictionaries after " + watch.ElapsedMilliseconds + " ms.");
+                }
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
+            }
+        }
+
+        public async System.Threading.Tasks.Task SendCoreDictionaryCategories(List<CoreDictionaryCategory> coreDictionaryCategories)
+        {
+            try
+            {
+                await ValidateJWTToken();
+                await CreateLogEntryAsync(LogSeverity.Info, "About to send " + coreDictionaryCategories.Count() + " core dictionary categories.");
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "dictionary-categories-import",
+                    new StringContent(JsonConvert.SerializeObject(coreDictionaryCategories), Encoding.UTF8, "application/json"));
+                if (!response.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Error,
+                        "FAILURE while sending core dictionary categories after " + watch.ElapsedMilliseconds + " ms; "
+                        + await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    watch.Stop();
+                    await CreateLogEntryAsync(LogSeverity.Info,
+                        "Success while sending core dictionary categories after " + watch.ElapsedMilliseconds + " ms.");
+                }
+            }
+            catch (Exception e)
+            {
+                await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
+            }
+        }
     }
 }
