@@ -234,6 +234,7 @@ namespace Amplifier
         public bool unit_roundup { get; set; }
         public decimal weight { get; set; }
         public decimal capacity { get; set; }
+        public string ean { get; set; }
 
     }
     
