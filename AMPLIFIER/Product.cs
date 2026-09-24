@@ -199,6 +199,7 @@ namespace Amplifier
         public decimal additional_fees_net { get; set; }
         public decimal additional_fees_gross { get; set; }
         public bool is_bundle { get; set; }
+        public decimal? loyalty_points { get; set; }
     }
 
     public class RelatedProducts

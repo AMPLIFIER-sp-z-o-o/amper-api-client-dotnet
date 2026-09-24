@@ -79,6 +79,8 @@ namespace Amplifier
         public object customer_metadata { get; set; }
         public bool for_employees { get; set; }
         public Account? account_details { get; set; }
+        public bool? is_in_loyalty_program { get; set; }
+        public decimal? loyalty_points { get; set; }
     }
 
     public class CustomerProductLogisticMinimum
