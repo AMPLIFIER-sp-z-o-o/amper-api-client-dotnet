@@ -35,6 +35,8 @@ namespace Amplifier
         public int product { get; set; }
         public int? promotion_condition { get; set; }
         public Promotion? promotion { get; set; }
+        public bool product_is_bundle { get; set; }
+        public List<BundleItem> bundle_items { get; set; }
     }
 
     public class ShippingAddress

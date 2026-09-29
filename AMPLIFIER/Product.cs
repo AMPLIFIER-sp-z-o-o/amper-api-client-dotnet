@@ -290,4 +290,15 @@ namespace Amplifier
         public decimal quantity { get; set; }
         public decimal price { get; set; }
     }
+
+    public class BundleItem
+    {
+        public int product { get; set; }
+        public string product_external_id { get; set; }
+        public string product_name { get; set; }
+        public string product_sku { get; set; }
+        public string product_ean { get; set; }
+        public Decimal quantity { get; set; }
+        public Decimal price { get; set; }
+    }
 }
