@@ -137,4 +137,24 @@ namespace Amplifier
         public int product { get; set; }
         public int? promotion_condition { get; set; }
     }
+
+    public class ExternalOrder
+    {
+        public string customer_external_id { get; set; }
+        public bool is_producer_order { get; set; }
+        public string producer_order_number { get; set; }
+        public string document_provider_short_name { get; set; }
+        public string description { get; set; }
+        public List<ExternalOrderLine> lines { get; set; }
+        public string shipment_type_id { get; set; }
+        public string recipient_order_number { get; set; }
+    }
+
+    public class ExternalOrderLine
+    {
+        public decimal quantity { get; set; }
+        public string product_external_id { get; set; }
+        public string ean { get; set; }
+        public decimal? suggested_price { get; set; }
+    }
 }
