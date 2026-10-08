@@ -1630,14 +1630,15 @@ namespace Amplifier
             }
         }
 
-        public async System.Threading.Tasks.Task CreateExternalOrder(ExternalOrder order)
+        public async System.Threading.Tasks.Task<HttpResponseMessage?> CreateExternalOrder(ExternalOrder order)
         {
+            HttpResponseMessage? response = null;
             try
             {
                 await ValidateJWTToken();
                 await CreateLogEntryAsync(LogSeverity.Info, "About to send external order.");
                 var watch = System.Diagnostics.Stopwatch.StartNew();
-                var response = await _client.PostAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "create-order",
+                response = await _client.PostAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "create-order",
                     new StringContent(JsonConvert.SerializeObject(order), Encoding.UTF8,
                         "application/json"));
                 if (!response.IsSuccessStatusCode)
@@ -1658,6 +1659,7 @@ namespace Amplifier
             {
                 await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
+            return response;
         }
 
         public void Dispose()
