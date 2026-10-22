@@ -99,7 +99,7 @@ namespace Amplifier
                 string incrementalQuery = isIncremental ? "?incremental=1" : "";
                 string content = JsonConvert.SerializeObject(priceLevels);
                 await CreateLogEntryAsync(LogSeverity.Info, "About to send " + priceLevels.Count() + " prices. Size: " + content.Length);
-                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "prices-import",
+                var response = await _client.PostAsync(_wsConfig.B2BWSUrl + "prices-import" + incrementalQuery,
                     new StringContent(content, Encoding.UTF8, "application/json"));
                 if (!response.IsSuccessStatusCode)
                 {
@@ -281,7 +281,7 @@ namespace Amplifier
                 var response = new HttpResponseMessage();
                 if (relations.Count < 1000000)
                 {
-                    response = await _client.PostAsync(_wsConfig.B2BWSUrl + "customer-logistic-minimum-import",
+                    response = await _client.PostAsync(_wsConfig.B2BWSUrl + "customer-logistic-minimum-import" + incrementalQuery,
                         new StringContent(JsonConvert.SerializeObject(relations), Encoding.UTF8, "application/json"));
                 }
                 else
@@ -294,7 +294,7 @@ namespace Amplifier
                         var serializer = new JsonSerializer();
                         serializer.Serialize(writer, relations);
 
-                        response = await _client.PostAsync(_wsConfig.B2BWSUrl + "customer-logistic-minimum-import",
+                        response = await _client.PostAsync(_wsConfig.B2BWSUrl + "customer-logistic-minimum-import" + incrementalQuery,
                              new StringContent(sw.ToString(), Encoding.UTF8, "application/json"));
                     }
                 }
