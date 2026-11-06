@@ -506,16 +506,17 @@ namespace Amplifier
             {
                 await ValidateJWTToken();
                 await CreateLogEntryAsync(LogSeverity.Info, "About to send " + category_discounts.Count() + " category discounts.");
-                IEnumerable<List<CategoryDiscount>> toSend = WSUtilities.SplitList(category_discounts, 50000);
+                List<List<CategoryDiscount>> toSend = WSUtilities.SplitList(category_discounts, 50000).ToList();
                 string first_package = "1";
                 string last_package = "0";
                 string single_thread = "1";
                 var watch = System.Diagnostics.Stopwatch.StartNew();
-                int errors = 0;
                 string incrementalQuery = isIncremental ? "&incremental=1" : "";
-                foreach (List<CategoryDiscount> p in toSend)
+                string importProcessQuery = "";
+                for (int i = 0; i < toSend.Count; i++)
                 {
-                    if (p.Count() < 50000)
+                    List<CategoryDiscount> p = toSend[i];
+                    if (i == toSend.Count - 1)
                     {
                         last_package = "1";
                         single_thread = "0";
@@ -523,20 +524,32 @@ namespace Amplifier
 
                     var response = await _client.PostAsync(
                         _wsConfig.B2BWSUrl + "category-discount-import?single_thread=1&first_package=" + first_package +
-                        "&last_package=" + last_package + "&single_thread=" + single_thread + incrementalQuery,
+                        "&last_package=" + last_package + "&single_thread=" + single_thread + incrementalQuery + importProcessQuery,
                         new StringContent(JsonConvert.SerializeObject(p), Encoding.UTF8, "application/json"));
+                    if (first_package == "1")
+                    {
+                        if (!response.IsSuccessStatusCode)
+                        {
+                            await CreateLogEntryAsync(LogSeverity.Error, "FAILURE while starting category discount import: " 
+                                + await response.Content.ReadAsStringAsync());
+                            return;
+                        }
+                        string importProcessId = GetImportProcessId(await response.Content.ReadAsStringAsync());
+                        if (importProcessId != null)
+                            importProcessQuery = "&import_process_id=" + Uri.EscapeDataString(importProcessId);
+                    }
                     first_package = "0";
                     if (!response.IsSuccessStatusCode)
                     {
                         await CreateLogEntryAsync(LogSeverity.Error,
-                        "FAILURE while sending a batch of " + p.Count() + " category discounts; "
+                        "FAILURE while sending a batch of " + p.Count() + " category discounts, aborting; "
                         + await response.Content.ReadAsStringAsync());
-                        errors++;
+                        return;
                     }
                 }
                 watch.Stop();
                 await CreateLogEntryAsync(LogSeverity.Info,
-                    "Sending category discounts finished after " + watch.ElapsedMilliseconds + " ms with " + errors + " errors.");
+                    "Sending category discounts finished after " + watch.ElapsedMilliseconds + " ms.");
             }
             catch (Exception e)
             {
@@ -1204,7 +1217,22 @@ namespace Amplifier
                 await CreateLogEntryAsync(LogSeverity.Info, "JWT token refresh successful.");
             }
         }
-        
+
+        private static string GetImportProcessId(string content)
+        {
+            if (string.IsNullOrWhiteSpace(content))
+                return null;
+            try
+            {
+                JToken id = JObject.Parse(content)["import_process_id"];
+                return id == null || id.Type == JTokenType.Null ? null : id.ToString();
+            }
+            catch (JsonReaderException)
+            {
+                return null;
+            }
+        }
+
         public async System.Threading.Tasks.Task SendPaymentFormsAsync(List<PaymentForm> payment_forms)
         {
             try
