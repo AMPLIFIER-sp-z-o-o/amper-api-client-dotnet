@@ -21,12 +21,13 @@ namespace Amplifier
         public Backend(WSConfig wsConfig)
         {
             this._wsConfig = wsConfig;
+            _client.DefaultRequestHeaders.Accept.Clear();
             AttachAuthorizationHeader();
         }
 
         private void AttachAuthorizationHeader()
         {
-            _client.DefaultRequestHeaders.Accept.Clear();
+            _client.DefaultRequestHeaders.Remove("Authorization");
             _client.DefaultRequestHeaders.Add("Authorization", "Bearer " + _wsConfig.JWTToken["access_token"]);
         }
 
@@ -1202,6 +1203,8 @@ namespace Amplifier
         {
             if (!WSUtilities.IsTokenExpired((string) _wsConfig.JWTToken["access_token"]))
                 await RefreshToken();
+            else if (_client.DefaultRequestHeaders.Authorization?.Parameter != (string)_wsConfig.JWTToken["access_token"])
+                AttachAuthorizationHeader();
         }
 
         private async Task RefreshToken()
@@ -1214,6 +1217,7 @@ namespace Amplifier
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
                 _wsConfig.JWTToken = JObject.Parse(responseContent);
+                AttachAuthorizationHeader();
                 await CreateLogEntryAsync(LogSeverity.Info, "JWT token refresh successful.");
             }
         }

@@ -96,7 +96,7 @@ namespace Amplifier.Utils
             var handler = new JwtSecurityTokenHandler();
             var decodedValue = handler.ReadJwtToken(token);
 
-            if (decodedValue.ValidTo < DateTime.UtcNow)
+            if (decodedValue.ValidTo < DateTime.UtcNow.AddSeconds(60))
                 return false;
             else
                 return true;
