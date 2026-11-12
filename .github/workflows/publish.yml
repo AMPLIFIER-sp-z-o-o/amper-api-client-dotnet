@@ -22,7 +22,7 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Pack
-        run: dotnet pack AmperApiClient.NET.csproj -c Release -o out
+        run: dotnet pack AmperApiClient.NET.csproj -c Release -o out -p:GeneratePackageOnBuild=false
 
       - name: NuGet login (OIDC -> short-lived API key)
         uses: NuGet/login@v1
