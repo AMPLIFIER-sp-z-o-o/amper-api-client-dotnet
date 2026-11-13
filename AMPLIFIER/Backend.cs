@@ -1469,8 +1469,9 @@ namespace Amplifier
                 await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
         }
-        public async System.Threading.Tasks.Task AddTranslatorRelation(string objectType, string externalId, string internalId)
+        public async System.Threading.Tasks.Task<HttpResponseMessage?> AddTranslatorRelation(string objectType, string externalId, string internalId)
         {
+            HttpResponseMessage? response = null;
             try
             {
                 await ValidateJWTToken();
@@ -1479,7 +1480,7 @@ namespace Amplifier
 
                 var content = new StringContent("{\n  \"object_type\": \"" + objectType + "\",\n  \"external_id\": \"" + externalId + "\",\n  \"internal_id\": " + internalId + "\n}", Encoding.UTF8, "application/json");
 
-                var response = await _client.PostAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "translator/add-relation", content);
+                response = await _client.PostAsync(_wsConfig.B2BWSUrl.Replace("api/", "") + "translator/add-relation", content);
                 if (!response.IsSuccessStatusCode)
                 {
                     watch.Stop();
@@ -1498,6 +1499,7 @@ namespace Amplifier
             {
                 await CreateLogEntryAsync(LogSeverity.Error, e.Message, e);
             }
+            return response;
         }
         public async System.Threading.Tasks.Task<List<CustomerForExport>> GetListOfCustomers()
         {
